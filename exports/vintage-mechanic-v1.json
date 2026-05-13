@@ -1,4 +1,7 @@
 {
+  "_exportedAt": "2026-05-13T22:32:29.130Z",
+  "_exportedFrom": "instruments/vintage-mechanic-v1.json",
+  "_note": "See HOW-TO-EDIT.md in this folder for what each field does.",
   "id": "vintage-mechanic-v1",
   "version": 2,
   "title": "Vintage Mechanic Fit Assessment",
@@ -84,8 +87,16 @@
           "type": "forced-choice",
           "prompt": "When I encounter a problem I've never seen before, I most often:",
           "options": [
-            { "label": "Research what others have tried first.", "axis": "curiosity", "score": -1 },
-            { "label": "Start poking at it to see how it responds.", "axis": "curiosity", "score": 1 }
+            {
+              "label": "Research what others have tried first.",
+              "axis": "curiosity",
+              "score": -1
+            },
+            {
+              "label": "Start poking at it to see how it responds.",
+              "axis": "curiosity",
+              "score": 1
+            }
           ]
         },
         {
@@ -93,8 +104,16 @@
           "type": "forced-choice",
           "prompt": "I find more satisfaction in:",
           "options": [
-            { "label": "Solving a problem using a known method.", "axis": "curiosity", "score": -1 },
-            { "label": "Figuring out why something behaves unexpectedly.", "axis": "curiosity", "score": 1 }
+            {
+              "label": "Solving a problem using a known method.",
+              "axis": "curiosity",
+              "score": -1
+            },
+            {
+              "label": "Figuring out why something behaves unexpectedly.",
+              "axis": "curiosity",
+              "score": 1
+            }
           ]
         },
         {
@@ -102,8 +121,16 @@
           "type": "forced-choice",
           "prompt": "When two systems behave in similar ways, my first instinct is to:",
           "options": [
-            { "label": "Note the similarity and move on.", "axis": "curiosity", "score": -1 },
-            { "label": "Wonder if the same underlying physics is at play.", "axis": "curiosity", "score": 1 }
+            {
+              "label": "Note the similarity and move on.",
+              "axis": "curiosity",
+              "score": -1
+            },
+            {
+              "label": "Wonder if the same underlying physics is at play.",
+              "axis": "curiosity",
+              "score": 1
+            }
           ]
         },
         {
@@ -111,8 +138,16 @@
           "type": "forced-choice",
           "prompt": "I'd rather work on:",
           "options": [
-            { "label": "A car with a clear factory spec to restore.", "axis": "curiosity", "score": -1 },
-            { "label": "A car nobody has documented properly.", "axis": "curiosity", "score": 1 }
+            {
+              "label": "A car with a clear factory spec to restore.",
+              "axis": "curiosity",
+              "score": -1
+            },
+            {
+              "label": "A car nobody has documented properly.",
+              "axis": "curiosity",
+              "score": 1
+            }
           ]
         },
         {
@@ -120,8 +155,16 @@
           "type": "forced-choice",
           "prompt": "When something works correctly but I don't fully understand why:",
           "options": [
-            { "label": "I leave it alone — it works.", "axis": "curiosity", "score": -1 },
-            { "label": "It bothers me until I work it out.", "axis": "curiosity", "score": 1 }
+            {
+              "label": "I leave it alone — it works.",
+              "axis": "curiosity",
+              "score": -1
+            },
+            {
+              "label": "It bothers me until I work it out.",
+              "axis": "curiosity",
+              "score": 1
+            }
           ]
         },
         {
@@ -129,8 +172,16 @@
           "type": "forced-choice",
           "prompt": "I tend to ask:",
           "options": [
-            { "label": "'What's the fix?'", "axis": "curiosity", "score": -1 },
-            { "label": "'Why does this happen?'", "axis": "curiosity", "score": 1 }
+            {
+              "label": "'What's the fix?'",
+              "axis": "curiosity",
+              "score": -1
+            },
+            {
+              "label": "'Why does this happen?'",
+              "axis": "curiosity",
+              "score": 1
+            }
           ]
         }
       ]
@@ -145,8 +196,16 @@
           "type": "forced-choice",
           "prompt": "What matters most about my work:",
           "options": [
-            { "label": "Getting jobs done on time and getting paid fairly.", "axis": "mastery", "score": -1 },
-            { "label": "Being known for the quality of what I do.", "axis": "mastery", "score": 1 }
+            {
+              "label": "Getting jobs done on time and getting paid fairly.",
+              "axis": "mastery",
+              "score": -1
+            },
+            {
+              "label": "Being known for the quality of what I do.",
+              "axis": "mastery",
+              "score": 1
+            }
           ]
         },
         {
@@ -154,8 +213,16 @@
           "type": "forced-choice",
           "prompt": "I'd describe my craft as:",
           "options": [
-            { "label": "A job I do well.", "axis": "mastery", "score": -1 },
-            { "label": "Part of who I am.", "axis": "mastery", "score": 1 }
+            {
+              "label": "A job I do well.",
+              "axis": "mastery",
+              "score": -1
+            },
+            {
+              "label": "Part of who I am.",
+              "axis": "mastery",
+              "score": 1
+            }
           ]
         },
         {
@@ -163,8 +230,16 @@
           "type": "forced-choice",
           "prompt": "The recognition that matters most to me comes from:",
           "options": [
-            { "label": "Customers and my paycheck.", "axis": "mastery", "score": -1 },
-            { "label": "Other people deeply skilled in the same craft.", "axis": "mastery", "score": 1 }
+            {
+              "label": "Customers and my paycheck.",
+              "axis": "mastery",
+              "score": -1
+            },
+            {
+              "label": "Other people deeply skilled in the same craft.",
+              "axis": "mastery",
+              "score": 1
+            }
           ]
         },
         {
@@ -172,8 +247,16 @@
           "type": "forced-choice",
           "prompt": "I judge my own work against:",
           "options": [
-            { "label": "The shop's standards.", "axis": "mastery", "score": -1 },
-            { "label": "The best in the world at this.", "axis": "mastery", "score": 1 }
+            {
+              "label": "The shop's standards.",
+              "axis": "mastery",
+              "score": -1
+            },
+            {
+              "label": "The best in the world at this.",
+              "axis": "mastery",
+              "score": 1
+            }
           ]
         },
         {
@@ -181,8 +264,16 @@
           "type": "forced-choice",
           "prompt": "A great day at work looks like:",
           "options": [
-            { "label": "Smooth, predictable jobs that go in and out.", "axis": "mastery", "score": -1 },
-            { "label": "Cracking something I haven't seen before.", "axis": "mastery", "score": 1 }
+            {
+              "label": "Smooth, predictable jobs that go in and out.",
+              "axis": "mastery",
+              "score": -1
+            },
+            {
+              "label": "Cracking something I haven't seen before.",
+              "axis": "mastery",
+              "score": 1
+            }
           ]
         },
         {
@@ -190,8 +281,16 @@
           "type": "forced-choice",
           "prompt": "Offered the same pay either way, I'd take:",
           "options": [
-            { "label": "Routine work I'm already good at.", "axis": "mastery", "score": -1 },
-            { "label": "Harder work that would stretch me.", "axis": "mastery", "score": 1 }
+            {
+              "label": "Routine work I'm already good at.",
+              "axis": "mastery",
+              "score": -1
+            },
+            {
+              "label": "Harder work that would stretch me.",
+              "axis": "mastery",
+              "score": 1
+            }
           ]
         }
       ]
@@ -206,8 +305,16 @@
           "type": "forced-choice",
           "prompt": "On a free Saturday afternoon, I'd rather:",
           "options": [
-            { "label": "Follow a detailed restoration guide step by step.", "axis": "curiosity", "score": -1 },
-            { "label": "Diagnose a quirk nobody else has been able to nail down.", "axis": "curiosity", "score": 1 }
+            {
+              "label": "Follow a detailed restoration guide step by step.",
+              "axis": "curiosity",
+              "score": -1
+            },
+            {
+              "label": "Diagnose a quirk nobody else has been able to nail down.",
+              "axis": "curiosity",
+              "score": 1
+            }
           ]
         },
         {
@@ -215,8 +322,16 @@
           "type": "forced-choice",
           "prompt": "The books, podcasts, or videos I gravitate to are mostly about:",
           "options": [
-            { "label": "How specific repairs are done.", "axis": "curiosity", "score": -1 },
-            { "label": "How and why systems work the way they do.", "axis": "curiosity", "score": 1 }
+            {
+              "label": "How specific repairs are done.",
+              "axis": "curiosity",
+              "score": -1
+            },
+            {
+              "label": "How and why systems work the way they do.",
+              "axis": "curiosity",
+              "score": 1
+            }
           ]
         },
         {
@@ -224,8 +339,16 @@
           "type": "forced-choice",
           "prompt": "When I learn a new fact about thermodynamics, materials, or fluid dynamics:",
           "options": [
-            { "label": "I file it for later — interesting but not immediately useful.", "axis": "curiosity", "score": -1 },
-            { "label": "I start thinking about which problems it might explain.", "axis": "curiosity", "score": 1 }
+            {
+              "label": "I file it for later — interesting but not immediately useful.",
+              "axis": "curiosity",
+              "score": -1
+            },
+            {
+              "label": "I start thinking about which problems it might explain.",
+              "axis": "curiosity",
+              "score": 1
+            }
           ]
         },
         {
@@ -233,8 +356,16 @@
           "type": "forced-choice",
           "prompt": "After hours, I usually:",
           "options": [
-            { "label": "Disconnect from work completely.", "axis": "mastery", "score": -1 },
-            { "label": "Read, watch, or tinker with topics related to my craft.", "axis": "mastery", "score": 1 }
+            {
+              "label": "Disconnect from work completely.",
+              "axis": "mastery",
+              "score": -1
+            },
+            {
+              "label": "Read, watch, or tinker with topics related to my craft.",
+              "axis": "mastery",
+              "score": 1
+            }
           ]
         },
         {
@@ -242,8 +373,16 @@
           "type": "forced-choice",
           "prompt": "When I learn a new technique:",
           "options": [
-            { "label": "I use it on the job when it comes up.", "axis": "mastery", "score": -1 },
-            { "label": "I practice it on my own time until it's automatic.", "axis": "mastery", "score": 1 }
+            {
+              "label": "I use it on the job when it comes up.",
+              "axis": "mastery",
+              "score": -1
+            },
+            {
+              "label": "I practice it on my own time until it's automatic.",
+              "axis": "mastery",
+              "score": 1
+            }
           ]
         },
         {
@@ -251,8 +390,16 @@
           "type": "forced-choice",
           "prompt": "Working on cars or my own projects after dinner sounds:",
           "options": [
-            { "label": "Like the last thing I'd want to do.", "axis": "mastery", "score": -1 },
-            { "label": "Like a normal evening.", "axis": "mastery", "score": 1 }
+            {
+              "label": "Like the last thing I'd want to do.",
+              "axis": "mastery",
+              "score": -1
+            },
+            {
+              "label": "Like a normal evening.",
+              "axis": "mastery",
+              "score": 1
+            }
           ]
         }
       ]
@@ -267,8 +414,16 @@
           "type": "forced-choice",
           "prompt": "A car comes in with an intermittent miss only when the engine is fully heat-soaked. No service bulletin covers it. I would:",
           "options": [
-            { "label": "Replace the most-likely heat-sensitive components in order until it's gone.", "axis": "curiosity", "score": -1 },
-            { "label": "Map where heat is accumulating and which components are near their thermal limit, then form a hypothesis.", "axis": "curiosity", "score": 1 }
+            {
+              "label": "Replace the most-likely heat-sensitive components in order until it's gone.",
+              "axis": "curiosity",
+              "score": -1
+            },
+            {
+              "label": "Map where heat is accumulating and which components are near their thermal limit, then form a hypothesis.",
+              "axis": "curiosity",
+              "score": 1
+            }
           ]
         },
         {
@@ -276,8 +431,16 @@
           "type": "forced-choice",
           "prompt": "I'm handed a part I've never seen before and asked what it does. I would:",
           "options": [
-            { "label": "Look it up or ask someone who knows.", "axis": "curiosity", "score": -1 },
-            { "label": "Examine it, weigh it, think about what physics it has to satisfy — then look it up.", "axis": "curiosity", "score": 1 }
+            {
+              "label": "Look it up or ask someone who knows.",
+              "axis": "curiosity",
+              "score": -1
+            },
+            {
+              "label": "Examine it, weigh it, think about what physics it has to satisfy — then look it up.",
+              "axis": "curiosity",
+              "score": 1
+            }
           ]
         },
         {
@@ -285,8 +448,16 @@
           "type": "forced-choice",
           "prompt": "A new noise appears only in a specific RPM range. I would first:",
           "options": [
-            { "label": "Check the most common causes in order.", "axis": "curiosity", "score": -1 },
-            { "label": "Think about what mechanical phenomena (resonance, harmonic, fuel-charge timing) operate in that range.", "axis": "curiosity", "score": 1 }
+            {
+              "label": "Check the most common causes in order.",
+              "axis": "curiosity",
+              "score": -1
+            },
+            {
+              "label": "Think about what mechanical phenomena (resonance, harmonic, fuel-charge timing) operate in that range.",
+              "axis": "curiosity",
+              "score": 1
+            }
           ]
         },
         {
@@ -294,8 +465,16 @@
           "type": "forced-choice",
           "prompt": "I made a mistake on a job that nobody noticed and the car drove out fine. I would:",
           "options": [
-            { "label": "Move on — no harm done.", "axis": "mastery", "score": -1 },
-            { "label": "Want to understand exactly how I missed it so it doesn't happen again.", "axis": "mastery", "score": 1 }
+            {
+              "label": "Move on — no harm done.",
+              "axis": "mastery",
+              "score": -1
+            },
+            {
+              "label": "Want to understand exactly how I missed it so it doesn't happen again.",
+              "axis": "mastery",
+              "score": 1
+            }
           ]
         },
         {
@@ -303,8 +482,16 @@
           "type": "forced-choice",
           "prompt": "A colleague asks why I take longer on certain jobs. I'd say:",
           "options": [
-            { "label": "I get them done — speed comes with reps.", "axis": "mastery", "score": -1 },
-            { "label": "I'd rather finish one job right than two jobs roughly.", "axis": "mastery", "score": 1 }
+            {
+              "label": "I get them done — speed comes with reps.",
+              "axis": "mastery",
+              "score": -1
+            },
+            {
+              "label": "I'd rather finish one job right than two jobs roughly.",
+              "axis": "mastery",
+              "score": 1
+            }
           ]
         },
         {
@@ -312,8 +499,16 @@
           "type": "forced-choice",
           "prompt": "After finishing a tough repair, I most often:",
           "options": [
-            { "label": "Move to the next ticket.", "axis": "mastery", "score": -1 },
-            { "label": "Think about how I could do it better next time.", "axis": "mastery", "score": 1 }
+            {
+              "label": "Move to the next ticket.",
+              "axis": "mastery",
+              "score": -1
+            },
+            {
+              "label": "Think about how I could do it better next time.",
+              "axis": "mastery",
+              "score": 1
+            }
           ]
         }
       ]
@@ -322,7 +517,12 @@
   "leadCapture": {
     "enabled": true,
     "mode": "pre-test",
-    "fields": ["name", "email", "phone", "experienceYears"],
+    "fields": [
+      "name",
+      "email",
+      "phone",
+      "experienceYears"
+    ],
     "gateHeading": "Tell us who you are, then take the assessment",
     "gateBlurb": "We collect your details up-front so the shop can follow up if you're a fit. Your responses to the assessment are private and only used for hiring consideration.",
     "cta": "Start the assessment",

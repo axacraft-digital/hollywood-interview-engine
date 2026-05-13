@@ -8,7 +8,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "check": "node scripts/check.mjs && node scripts/check-api.mjs"
+    "check": "node scripts/check.mjs && node scripts/check-api.mjs",
+    "export": "node scripts/export-instrument.mjs"
   },
   "dependencies": {
     "react": "^18.3.1",
