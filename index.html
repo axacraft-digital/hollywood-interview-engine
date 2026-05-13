@@ -208,15 +208,9 @@
     align-items: center; gap: var(--s-6);
     padding-top: 18px; padding-bottom: 18px;
   }
-  .lp-brand { display: inline-flex; align-items: baseline; gap: 6px; }
-  .lp-brand-mark {
-    font-family: var(--display); font-weight: 500;
-    font-size: 26px; letter-spacing: -0.02em; color: var(--ink);
-  }
-  .lp-brand-mark em { font-style: italic; color: var(--accent); font-weight: 500; }
-  .lp-brand-dot {
-    width: 6px; height: 6px; border-radius: 999px;
-    background: var(--accent); margin-left: 2px; transform: translateY(-12px);
+  .lp-brand { display: inline-flex; align-items: center; }
+  .lp-brand-logo {
+    height: 44px; width: auto; display: block;
   }
 
   nav.lp-primary { display: flex; gap: 26px; justify-content: center; }
@@ -425,6 +419,9 @@
     color: #fff;
     display: inline-flex; align-items: center; justify-content: center;
     font-family: var(--display); font-size: 17px; font-weight: 600;
+    line-height: 1;
+    padding-top: 2px;
+    font-feature-settings: "lnum";
   }
   .lp-step h3 { margin: var(--s-5) 0 6px; }
   .lp-step p { margin: 0; flex: 1; color: var(--ink-2); font-size: 15px; line-height: 1.55; }
@@ -612,16 +609,17 @@
     margin-top: var(--s-9);
   }
   .lp-foot-top {
-    display: grid; grid-template-columns: 1.2fr 1fr 1fr 1fr 1fr;
+    display: grid; grid-template-columns: 1.4fr 1fr 1fr;
     gap: var(--s-7);
     padding-bottom: var(--s-7);
     border-bottom: 1px solid rgba(255,255,255,0.12);
   }
   .lp-foot-brand {
-    font-family: var(--display); font-size: 30px; letter-spacing: -0.02em;
-    margin-bottom: var(--s-4); font-weight: 500;
+    margin-bottom: var(--s-4);
   }
-  .lp-foot-brand em { color: var(--gold); font-style: italic; font-weight: 500; }
+  .lp-foot-brand-logo {
+    height: 56px; width: auto; display: block;
+  }
   .lp-foot p, .lp-foot a { font-size: 14px; color: rgba(251, 248, 242, 0.7); line-height: 1.6; }
   .lp-foot a:hover { color: var(--gold); }
   .lp-foot h5 {
@@ -643,7 +641,7 @@
     .lp-arche-side { flex-direction: row; }
     .lp-steps { grid-template-columns: 1fr 1fr; }
     .lp-values { grid-template-columns: 1fr 1fr; }
-    .lp-foot-top { grid-template-columns: 1.2fr 1fr 1fr; }
+    .lp-foot-top { grid-template-columns: 1.4fr 1fr 1fr; }
   }
   @media (max-width: 760px) {
     :root { --s-8: 44px; --s-9: 64px; }
@@ -689,10 +687,9 @@
 <header class="lp-nav">
   <div class="lp-container">
     <div class="lp-row-tight">
-      <span class="lp-brand">
-        <span class="lp-brand-mark">Hollywood<em>Mechanic</em></span>
-        <span class="lp-brand-dot"></span>
-      </span>
+      <a href="/" class="lp-brand" aria-label="Hollywood Mechanic — home">
+        <img src="images/logo.png" alt="Hollywood Mechanic" class="lp-brand-logo" />
+      </a>
     </div>
 
     <nav class="lp-primary">
@@ -825,7 +822,7 @@
       <div>
         <span class="lp-eyebrow">The four archetypes</span>
         <h2 class="lp-display-2" style="margin: var(--s-3) 0 0;">
-          One axis is <span class="lp-ital">how you think.</span><br/>
+          One axis is <span class="lp-ital">how you think.</span>
           The other is <span class="lp-ital">why you work.</span>
         </h2>
       </div>
@@ -1042,12 +1039,12 @@
           <div class="lp-ph lp-founder-avatar warm-accent">
             <img class="lp-ph-img"
                  src="images/founder-avatar.jpg"
-                 alt="The shop owner"
+                 alt="Micah Coley"
                  loading="lazy"
                  onerror="this.remove()" />
           </div>
           <div>
-            <div class="lp-founder-name">The shop owner</div>
+            <div class="lp-founder-name">Micah Coley</div>
             <div class="lp-founder-role">Hollywood, CA · Working vintage Ferrari shop</div>
           </div>
         </div>
@@ -1201,7 +1198,9 @@
   <div class="lp-container">
     <div class="lp-foot-top">
       <div>
-        <div class="lp-foot-brand">Hollywood<em>Mechanic</em></div>
+        <div class="lp-foot-brand">
+          <img src="images/logo-on-dark.png" alt="Hollywood Mechanic" class="lp-foot-brand-logo" />
+        </div>
         <p style="max-width: 280px;">
           A 5-minute self-screen for mechanics who reason from physics on cars no service manual covers.
         </p>
@@ -1218,31 +1217,16 @@
       <div>
         <h5>The Shop</h5>
         <ul>
-          <li><a href="#shop">From the shop</a></li>
-          <li><a href="#faq">FAQ</a></li>
-          <li><a href="#hero">What we hire</a></li>
-        </ul>
-      </div>
-      <div>
-        <h5>Reading</h5>
-        <ul>
-          <li><a href="#">Need-for-Cognition (CEI-II)</a></li>
-          <li><a href="#">Self-Determination Theory</a></li>
-          <li><a href="#">Why forced-choice items</a></li>
-        </ul>
-      </div>
-      <div>
-        <h5>Legal</h5>
-        <ul>
-          <li><a href="#">Privacy</a></li>
-          <li><a href="#">Terms</a></li>
-          <li><a href="#">Contact</a></li>
+          <li><a href="https://hollywoodmechanic.com/about/" target="_blank" rel="noopener">About</a></li>
+          <li><a href="https://hollywoodmechanic.com/services/" target="_blank" rel="noopener">Services</a></li>
+          <li><a href="https://hollywoodmechanic.com/facilities/" target="_blank" rel="noopener">Facilities</a></li>
+          <li><a href="https://hollywoodmechanic.com/shop/" target="_blank" rel="noopener">Shop</a></li>
         </ul>
       </div>
     </div>
     <div class="lp-foot-bottom">
       <p>© 2026 Hollywood Mechanic · Hiring out of the top-right corner.</p>
-      <p>Made for craftsmen.</p>
+      <p>Made by <a href="https://www.kellysmith.com" target="_blank" rel="noopener">Kelly Smith</a>.</p>
     </div>
   </div>
 </footer>
