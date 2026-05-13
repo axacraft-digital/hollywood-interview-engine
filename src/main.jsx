@@ -26,12 +26,14 @@ function Demo() {
           adminToken={token}
           branding={{ companyName: 'Hollywood Mechanic' }}
         />
-        <div style={{ textAlign: 'center', marginTop: 24, fontSize: 12, color: '#8A7E6C' }}>
-          Demo views ·{' '}
-          <a style={{ color: '#8A7E6C' }} href="?">candidate flow</a> ·{' '}
-          <a style={{ color: '#8A7E6C' }} href="?admin=1">instrument preview</a> ·{' '}
-          <a style={{ color: '#8A7E6C' }} href="?submissions=1&token=dev-admin-token">submissions admin</a>
-        </div>
+        {import.meta.env.DEV && (
+          <div style={{ textAlign: 'center', marginTop: 24, fontSize: 12, color: '#8A7E6C' }}>
+            Demo views ·{' '}
+            <a style={{ color: '#8A7E6C' }} href="?">candidate flow</a> ·{' '}
+            <a style={{ color: '#8A7E6C' }} href="?admin=1">instrument preview</a> ·{' '}
+            <a style={{ color: '#8A7E6C' }} href="?submissions=1&token=dev-admin-token">submissions admin</a>
+          </div>
+        )}
       </div>
     </div>
   );
