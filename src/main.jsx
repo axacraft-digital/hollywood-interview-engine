@@ -24,7 +24,7 @@ function Demo() {
           adminMode={adminMode}
           submissionsMode={submissionsMode}
           adminToken={token}
-          branding={{ companyName: 'Axacraft Vintage Motorworks' }}
+          branding={{ companyName: 'Hollywood Mechanic' }}
         />
         <div style={{ textAlign: 'center', marginTop: 24, fontSize: 12, color: '#8A7E6C' }}>
           Demo views ·{' '}
