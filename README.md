@@ -25,7 +25,9 @@ hollywood-interview-engine/
 │   └── check.mjs                       Sanity check runner
 ├── data/
 │   └── submissions.json                Auto-created on first submission (dev only)
-├── index.html                          Demo entrypoint (vite)
+├── index.html                          Marketing landing page (front-of-funnel)
+├── app.html                            Vite SPA entrypoint (the quiz)
+├── images/                             Photo slots referenced by index.html
 ├── package.json
 └── vite.config.js
 ```

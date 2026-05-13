@@ -1,18 +1,1259 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vintage Mechanic Fit Assessment — Demo</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hollywood Mechanic — Are you a Tinkerer, or a Vintage Specialist?</title>
+<meta name="description" content="A 5-minute self-screen built by a working vintage Ferrari shop. Find out which kind of craftsman you really are." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+  rel="stylesheet"
+/>
+<style>
+  /* =====================================================================
+     Hollywood Mechanic — landing page
+     Standalone marketing surface. Class names prefixed .lp- so they can't
+     collide with the .via-* assessment library. Colors match the existing
+     vintage-mechanic palette (Rosso Corsa red, warm cream paper).
+     ===================================================================== */
+
+  :root {
+    /* Mirrors src/styles.css tokens so the landing feels continuous with the quiz */
+    --paper:       #FBF8F2;
+    --paper-2:     #F5F1EA;
+    --cream:       #efe9df;
+    --cream-2:     #e8e0d2;
+    --ideal-bg:    #f6e6d8;
+    --ink:         #1F1B16;
+    --ink-2:       #4a3f33;
+    --ink-3:       #6e6457;
+    --accent:      #B71C1C;
+    --accent-deep: #7C0D0D;
+    --gold:        #C5A572;
+    --rule:        #cdbfa8;
+    --rule-2:      #b8a98e;
+
+    --display: "Playfair Display", Georgia, serif;
+    --sans:    "Inter", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    --mono:    "JetBrains Mono", ui-monospace, monospace;
+
+    --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 24px;
+    --s-6: 32px; --s-7: 48px; --s-8: 64px; --s-9: 96px; --s-10: 128px;
+
+    --container: 1240px;
+    --gutter: 28px;
+
+    --r-sm: 4px;
+    --r-md: 8px;
+    --r-lg: 14px;
+    --r-xl: 22px;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+  img { max-width: 100%; display: block; }
+
+  /* ---------- Type system ---------- */
+  .lp-display-1 { font-family: var(--display); font-weight: 500; font-size: 76px; line-height: 1.02; letter-spacing: -0.022em; }
+  .lp-display-2 { font-family: var(--display); font-weight: 500; font-size: 52px; line-height: 1.06; letter-spacing: -0.018em; }
+  .lp-h1   { font-family: var(--display); font-weight: 500; font-size: 42px; line-height: 1.08; letter-spacing: -0.015em; }
+  .lp-h2   { font-family: var(--display); font-weight: 500; font-size: 32px; line-height: 1.15; letter-spacing: -0.012em; }
+  .lp-h3   { font-family: var(--sans);    font-weight: 600; font-size: 19px; line-height: 1.3; letter-spacing: -0.005em; }
+  .lp-lede { font-family: var(--sans);    font-weight: 400; font-size: 19px; line-height: 1.55; color: var(--ink-2); }
+  .lp-body { font-family: var(--sans);    font-weight: 400; font-size: 16px; line-height: 1.6; color: var(--ink-2); }
+  .lp-small{ font-family: var(--sans);    font-weight: 500; font-size: 14px; line-height: 1.45; color: var(--ink-2); }
+  .lp-eyebrow {
+    font-family: var(--mono); font-weight: 500; font-size: 12px;
+    text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent);
+  }
+  .lp-ital {
+    font-family: var(--display); font-style: italic; font-weight: 500;
+    color: var(--accent);
+  }
+
+  /* ---------- Layout ---------- */
+  .lp-container {
+    max-width: var(--container); margin: 0 auto;
+    padding: 0 var(--gutter);
+  }
+  .lp-section    { padding: var(--s-9) 0; }
+  .lp-section-sm { padding: var(--s-8) 0; }
+  .lp-stack-3 > * + * { margin-top: var(--s-3); }
+  .lp-stack-4 > * + * { margin-top: var(--s-4); }
+  .lp-stack-5 > * + * { margin-top: var(--s-5); }
+  .lp-row { display: flex; align-items: center; gap: var(--s-4); }
+  .lp-row-tight { display: flex; align-items: center; gap: var(--s-3); }
+
+  /* ---------- Buttons ---------- */
+  .lp-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 14px 22px;
+    border-radius: 999px;
+    font-family: var(--sans); font-weight: 600; font-size: 15px;
+    letter-spacing: -0.005em;
+    transition: transform .15s ease, background .15s ease, color .15s ease, border .15s ease;
+    white-space: nowrap;
+    border: 1px solid transparent;
+  }
+  .lp-btn-primary { background: var(--accent); color: #fff; }
+  .lp-btn-primary:hover { background: var(--accent-deep); }
+  .lp-btn-ghost { background: transparent; color: var(--ink); border-color: var(--rule-2); }
+  .lp-btn-ghost:hover { background: var(--paper-2); }
+  .lp-btn-sm { padding: 10px 16px; font-size: 14px; }
+  .lp-arrow { display: inline-block; transition: transform .15s; }
+  .lp-btn:hover .lp-arrow { transform: translateX(2px); }
+
+  /* ---------- Image placeholders (red-tinted striped) ---------- */
+  .lp-ph {
+    position: relative;
+    background:
+      repeating-linear-gradient(
+        135deg,
+        #e8d4c9 0 14px,
+        #e2cbbf 14px 28px
+      );
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    color: var(--accent-deep);
+  }
+  .lp-ph.warm-accent {
+    background:
+      repeating-linear-gradient(
+        135deg,
+        #e9c9b9 0 14px,
+        #e0bfae 14px 28px
+      );
+  }
+  .lp-ph.warm-cream {
+    background:
+      repeating-linear-gradient(
+        135deg,
+        #ede4d4 0 14px,
+        #e6dbc8 14px 28px
+      );
+    color: var(--ink-2);
+  }
+  .lp-ph-img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    display: block;
+  }
+  .lp-ph-label {
+    position: absolute; left: 14px; bottom: 14px;
+    z-index: 2;
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.02em;
+    background: rgba(251, 248, 242, 0.9);
+    padding: 6px 10px;
+    border-radius: 999px;
+    color: var(--ink);
+    backdrop-filter: blur(4px);
+  }
+  .lp-ph-1   { aspect-ratio: 1 / 1; }
+  .lp-ph-45  { aspect-ratio: 4 / 5; }
+  .lp-ph-43  { aspect-ratio: 4 / 3; }
+  .lp-ph-169 { aspect-ratio: 16 / 9; }
+
+  /* ---------- Cards / surfaces ---------- */
+  .lp-card {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: var(--r-lg);
+    padding: var(--s-6);
+  }
+  .lp-card-cream { background: var(--cream); border-color: transparent; }
+  .lp-card-ideal { background: var(--ideal-bg); border-color: transparent; }
+  .lp-card-ink   { background: var(--ink); color: var(--paper); border-color: transparent; }
+
+  /* ---------- Utility / announcement bar ---------- */
+  .lp-util {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 10px 0;
+    font-size: 12.5px;
+    letter-spacing: 0.005em;
+    white-space: nowrap;
+  }
+  .lp-util .lp-container { display: flex; justify-content: center; gap: 14px; align-items: center; }
+  .lp-util-dot { width: 4px; height: 4px; border-radius: 999px; background: var(--accent); }
+  .lp-util a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: rgba(255, 200, 200, 0.5);
+  }
+
+  /* ---------- Header ---------- */
+  header.lp-nav {
+    background: var(--paper);
+    border-bottom: 1px solid var(--rule);
+    position: sticky; top: 0; z-index: 50;
+  }
+  header.lp-nav .lp-container {
+    display: grid; grid-template-columns: auto 1fr auto;
+    align-items: center; gap: var(--s-6);
+    padding-top: 18px; padding-bottom: 18px;
+  }
+  .lp-brand { display: inline-flex; align-items: baseline; gap: 6px; }
+  .lp-brand-mark {
+    font-family: var(--display); font-weight: 500;
+    font-size: 26px; letter-spacing: -0.02em; color: var(--ink);
+  }
+  .lp-brand-mark em { font-style: italic; color: var(--accent); font-weight: 500; }
+  .lp-brand-dot {
+    width: 6px; height: 6px; border-radius: 999px;
+    background: var(--accent); margin-left: 2px; transform: translateY(-12px);
+  }
+
+  nav.lp-primary { display: flex; gap: 26px; justify-content: center; }
+  nav.lp-primary a {
+    font-size: 14.5px; font-weight: 500; color: var(--ink);
+    padding: 6px 0;
+    white-space: nowrap;
+  }
+  nav.lp-primary a:hover { color: var(--accent); }
+
+  .lp-header-right { display: flex; align-items: center; gap: 12px; justify-content: flex-end; white-space: nowrap; }
+
+  /* ---------- Hero ---------- */
+  .lp-hero { padding-top: var(--s-7); padding-bottom: var(--s-9); }
+  .lp-hero-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--s-5);
+  }
+  .lp-hero-copy { grid-column: span 7; padding-right: 24px; padding-top: 8px; }
+  .lp-hero-art  { grid-column: span 5; position: relative; }
+
+  .lp-hero h1 {
+    margin: 0;
+    font-family: var(--display); font-weight: 500;
+    font-size: 78px; line-height: 1.0; letter-spacing: -0.025em;
+    color: var(--ink);
+  }
+  .lp-hero h1 .lp-ital { color: var(--accent); font-weight: 500; }
+  .lp-hero p.lp-lede { max-width: 520px; margin-top: var(--s-5); font-size: 19px; }
+
+  .lp-hero-ctas { display: flex; gap: 12px; margin-top: var(--s-6); align-items: center; flex-wrap: wrap; }
+
+  .lp-hero-art-card {
+    border-radius: var(--r-xl);
+    overflow: hidden;
+    aspect-ratio: 4 / 5;
+    background:
+      repeating-linear-gradient(
+        135deg,
+        #d9b09e 0 16px,
+        #cfa491 16px 32px
+      );
+    position: relative;
+    color: var(--accent-deep);
+  }
+
+  .lp-hero-float {
+    position: absolute;
+    z-index: 5;
+    background: var(--paper);
+    border-radius: var(--r-md);
+    padding: 14px 18px;
+    box-shadow: 0 10px 28px rgba(60,30,15,0.10), 0 1px 0 rgba(0,0,0,0.04);
+    display: flex; align-items: center; gap: 12px;
+    border: 1px solid var(--rule);
+  }
+  .lp-hero-float-1 { left: -28px; top: 64px; }
+  .lp-hero-float-2 { right: -20px; bottom: 70px; max-width: 240px; flex-direction: column; align-items: flex-start; gap: 6px; }
+
+  .lp-hero-trust {
+    margin-top: var(--s-7);
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: var(--s-5);
+    padding-top: var(--s-5);
+    border-top: 1px solid var(--rule);
+  }
+  .lp-hero-trust-item .lp-eyebrow { color: var(--ink-3); }
+  .lp-hero-trust-item h4 {
+    margin: 6px 0 2px;
+    font-family: var(--display); font-weight: 500; font-size: 22px;
+    letter-spacing: -0.01em;
+  }
+  .lp-hero-trust-item p {
+    margin: 0; font-size: 13.5px; color: var(--ink-3); line-height: 1.45;
+  }
+
+  /* ---------- Section header ---------- */
+  .lp-section-head {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: var(--s-7); align-items: end;
+    margin-bottom: var(--s-7);
+  }
+  .lp-section-head .lp-lede { max-width: 460px; }
+
+  /* ---------- Values strip ---------- */
+  .lp-values {
+    background: var(--cream);
+    border-radius: var(--r-xl);
+    padding: var(--s-7);
+    display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: var(--s-6);
+  }
+  .lp-value h4 {
+    font-family: var(--display); font-weight: 500; font-size: 22px;
+    letter-spacing: -0.01em; margin: 0 0 6px;
+  }
+  .lp-value p { margin: 0; color: var(--ink-2); font-size: 14px; line-height: 1.5; }
+  .lp-value-bullet {
+    width: 28px; height: 28px; border-radius: 999px;
+    display: inline-flex; align-items: center; justify-content: center;
+    background: var(--paper); border: 1px solid var(--rule);
+    font-family: var(--display); font-style: italic; font-size: 14px; color: var(--accent);
+    margin-bottom: var(--s-3);
+  }
+
+  /* ---------- Archetypes bento ---------- */
+  .lp-bento {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr 1fr;
+    gap: var(--s-4);
+  }
+  .lp-arche-card {
+    border-radius: var(--r-xl);
+    padding: var(--s-7);
+    display: flex; flex-direction: column;
+    min-height: 440px;
+    position: relative;
+    overflow: hidden;
+  }
+  .lp-arche-card.lp-card-ideal {
+    background: var(--ideal-bg);
+    border: 1px solid rgba(183, 28, 28, 0.12);
+  }
+  .lp-arche-card.lp-card-cream {
+    background: var(--cream);
+    border: 1px solid transparent;
+  }
+  .lp-arche-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.7);
+    border: 1px solid rgba(0,0,0,0.06);
+    padding: 6px 12px; border-radius: 999px;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ink-2);
+    width: max-content;
+  }
+  .lp-arche-card h3 {
+    font-family: var(--display); font-weight: 500; font-size: 36px;
+    letter-spacing: -0.015em; margin: var(--s-5) 0 var(--s-3);
+    line-height: 1.05;
+  }
+  .lp-arche-headline {
+    font-family: var(--display); font-style: italic; font-weight: 500;
+    font-size: 19px; line-height: 1.3; color: var(--accent-deep);
+    margin: 0 0 var(--s-3);
+  }
+  .lp-arche-card p.lp-body { font-size: 15px; margin: 0; }
+  .lp-arche-meta {
+    margin-top: auto; padding-top: var(--s-5);
+    border-top: 1px solid rgba(0,0,0,0.08);
+    display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-4);
+  }
+  .lp-arche-meta .lp-eyebrow { color: var(--ink-3); margin-bottom: 2px; display: block; }
+  .lp-arche-meta .lp-val {
+    font-family: var(--display); font-size: 18px; letter-spacing: -0.01em; color: var(--ink);
+  }
+  .lp-arche-side { display: flex; flex-direction: column; gap: var(--s-4); }
+  .lp-arche-small {
+    border-radius: var(--r-xl);
+    padding: var(--s-6);
+    flex: 1;
+    display: flex; flex-direction: column;
+    min-height: 212px;
+    background: var(--paper-2);
+    border: 1px solid var(--rule);
+  }
+  .lp-arche-small h3 {
+    font-family: var(--display); font-weight: 500; font-size: 26px;
+    letter-spacing: -0.012em; margin: var(--s-4) 0 var(--s-2);
+    line-height: 1.1;
+  }
+  .lp-arche-small p {
+    margin: 0; font-size: 14px; color: var(--ink-2); line-height: 1.5;
+  }
+  .lp-arche-small.exclude { background: var(--cream-2); border-color: transparent; }
+  .lp-fit-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--mono); font-size: 10.5px;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .lp-fit-dot { width: 7px; height: 7px; border-radius: 999px; }
+  .lp-fit-dot.ideal     { background: var(--accent); }
+  .lp-fit-dot.secondary { background: var(--gold); }
+  .lp-fit-dot.weak      { background: var(--ink-3); opacity: 0.55; }
+  .lp-fit-dot.exclude   { background: var(--ink-3); opacity: 0.25; }
+
+  /* ---------- How it works ---------- */
+  .lp-steps {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: var(--s-4);
+  }
+  .lp-step {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: var(--r-lg);
+    padding: var(--s-6);
+    position: relative;
+    min-height: 260px;
+    display: flex; flex-direction: column;
+  }
+  .lp-step-num {
+    width: 36px; height: 36px;
+    border-radius: 999px;
+    background: var(--accent);
+    color: #fff;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-family: var(--display); font-size: 17px; font-weight: 600;
+  }
+  .lp-step h3 { margin: var(--s-5) 0 6px; }
+  .lp-step p { margin: 0; flex: 1; color: var(--ink-2); font-size: 15px; line-height: 1.55; }
+  .lp-step-foot {
+    margin-top: var(--s-5); padding-top: var(--s-4);
+    border-top: 1px dashed var(--rule-2);
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--ink-3);
+  }
+
+  /* ---------- Sample result (dark card) ---------- */
+  .lp-sample {
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: var(--r-xl);
+    padding: var(--s-8);
+    display: grid; grid-template-columns: 1.1fr 1fr;
+    gap: var(--s-7); align-items: center;
+  }
+  .lp-sample h2 {
+    font-family: var(--display); font-weight: 500; font-size: 46px;
+    letter-spacing: -0.018em; line-height: 1.05; margin: 0 0 var(--s-4);
+  }
+  .lp-sample h2 .lp-ital { color: var(--gold); }
+  .lp-sample p.lp-lede {
+    color: rgba(251, 248, 242, 0.78);
+    font-size: 17px; max-width: 420px;
+  }
+  .lp-sample-card {
+    background: var(--paper);
+    color: var(--ink);
+    border-radius: var(--r-lg);
+    padding: var(--s-6);
+  }
+  .lp-sample-chart {
+    border: 1px solid var(--rule);
+    border-radius: var(--r-md);
+    padding: 14px;
+    background: var(--paper-2);
+  }
+  .lp-sample-chart-cap {
+    margin-top: var(--s-3);
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 13px;
+  }
+  .lp-sample-cap-label {
+    font-weight: 600; color: var(--accent);
+  }
+
+  .lp-chip-row {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-top: var(--s-5);
+  }
+  .lp-chip {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: var(--paper);
+    padding: 8px 14px; border-radius: 999px;
+    font-size: 13px; font-weight: 500;
+    white-space: nowrap;
+  }
+  .lp-chip-dot {
+    width: 7px; height: 7px; border-radius: 999px;
+  }
+
+  /* ---------- Founder ---------- */
+  .lp-founder {
+    display: grid; grid-template-columns: 1.05fr 1fr;
+    gap: var(--s-8); align-items: center;
+  }
+  .lp-founder-quote {
+    font-family: var(--display); font-weight: 500; font-size: 36px;
+    letter-spacing: -0.015em; line-height: 1.18; color: var(--ink);
+  }
+  .lp-founder-quote .lp-ital { color: var(--accent); }
+  .lp-founder-attrib {
+    margin-top: var(--s-5);
+    display: flex; align-items: center; gap: 14px;
+  }
+  .lp-founder-avatar {
+    width: 56px; height: 56px; border-radius: 999px;
+    flex-shrink: 0; overflow: hidden;
+  }
+  .lp-founder-name { font-weight: 600; font-size: 15.5px; }
+  .lp-founder-role { color: var(--ink-3); font-size: 13.5px; }
+
+  /* ---------- FAQ ---------- */
+  .lp-faq-grid {
+    display: grid; grid-template-columns: 0.85fr 1.55fr;
+    gap: var(--s-8); align-items: start;
+  }
+  .lp-faq-list { display: flex; flex-direction: column; }
+  .lp-faq-item {
+    border-top: 1px solid var(--rule);
+    padding: var(--s-5) 0;
+  }
+  .lp-faq-item:last-child { border-bottom: 1px solid var(--rule); }
+  .lp-faq-q {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: var(--s-4); cursor: pointer;
+  }
+  .lp-faq-q h4 {
+    margin: 0; flex: 1; min-width: 0;
+    font-family: var(--display); font-weight: 500; font-size: 21px;
+    letter-spacing: -0.01em; line-height: 1.2;
+  }
+  .lp-faq-q .lp-plus { color: var(--accent); font-size: 20px; line-height: 1; transition: transform .2s ease; display: inline-block; }
+  .lp-faq-a {
+    color: var(--ink-2); font-size: 15.5px; line-height: 1.6;
+    max-width: 620px; margin-top: var(--s-3);
+    display: none;
+  }
+  .lp-faq-item.open .lp-faq-a { display: block; }
+  .lp-faq-item.open .lp-plus { transform: rotate(45deg); }
+
+  /* ---------- CTA band ---------- */
+  .lp-cta-band {
+    background: var(--accent);
+    color: var(--paper);
+    border-radius: var(--r-xl);
+    padding: var(--s-9) var(--s-8);
+    display: grid; grid-template-columns: 1.3fr 1fr;
+    gap: var(--s-7); align-items: end;
+    position: relative; overflow: hidden;
+    isolation: isolate;
+  }
+  .lp-cta-band::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: url('images/cta-show.jpg') center 40% / cover no-repeat;
+    opacity: 0.55;
+    mix-blend-mode: soft-light;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .lp-cta-band::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: linear-gradient(100deg,
+      rgba(124, 13, 13, 0.92) 0%,
+      rgba(124, 13, 13, 0.74) 45%,
+      rgba(124, 13, 13, 0.28) 90%);
+    z-index: 0;
+    pointer-events: none;
+  }
+  .lp-cta-band > * { position: relative; z-index: 1; }
+  .lp-cta-band h2 {
+    font-family: var(--display); font-weight: 500; font-size: 60px;
+    letter-spacing: -0.022em; line-height: 1.02; margin: 0;
+  }
+  .lp-cta-band h2 .lp-ital { color: var(--gold); }
+  .lp-cta-band p {
+    color: rgba(251, 248, 242, 0.94);
+    max-width: 420px; font-size: 17px; margin: 0;
+  }
+  .lp-cta-band .lp-btn-primary { background: var(--paper); color: var(--ink); }
+  .lp-cta-band .lp-btn-primary:hover { background: #fff; }
+  .lp-cta-band .lp-btn-ghost {
+    color: var(--paper); border-color: rgba(255,255,255,0.45);
+  }
+  .lp-cta-band .lp-btn-ghost:hover { background: rgba(255,255,255,0.08); }
+
+  /* ---------- Disclaimer / fine print ---------- */
+  .lp-finep {
+    background: var(--paper-2);
+    border-radius: var(--r-lg);
+    padding: var(--s-6) var(--s-7);
+    display: grid; grid-template-columns: 240px 1fr;
+    gap: var(--s-6); align-items: start;
+  }
+  .lp-finep h4 {
+    font-family: var(--display); font-weight: 500; font-size: 20px;
+    margin: 0; letter-spacing: -0.01em;
+  }
+  .lp-finep p {
+    margin: 0; font-size: 13.5px; color: var(--ink-2); line-height: 1.55;
+  }
+  .lp-finep p + p { margin-top: var(--s-3); }
+
+  /* ---------- Footer ---------- */
+  footer.lp-foot {
+    background: var(--ink);
+    color: var(--paper);
+    padding: var(--s-9) 0 var(--s-7);
+    margin-top: var(--s-9);
+  }
+  .lp-foot-top {
+    display: grid; grid-template-columns: 1.2fr 1fr 1fr 1fr 1fr;
+    gap: var(--s-7);
+    padding-bottom: var(--s-7);
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+  }
+  .lp-foot-brand {
+    font-family: var(--display); font-size: 30px; letter-spacing: -0.02em;
+    margin-bottom: var(--s-4); font-weight: 500;
+  }
+  .lp-foot-brand em { color: var(--gold); font-style: italic; font-weight: 500; }
+  .lp-foot p, .lp-foot a { font-size: 14px; color: rgba(251, 248, 242, 0.7); line-height: 1.6; }
+  .lp-foot a:hover { color: var(--gold); }
+  .lp-foot h5 {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--paper);
+    margin: 0 0 var(--s-4); font-weight: 500;
+  }
+  .lp-foot ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+  .lp-foot-bottom {
+    padding-top: var(--s-6);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .lp-foot-bottom p { margin: 0; font-size: 12.5px; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 1100px) {
+    .lp-hero h1 { font-size: 64px; }
+    .lp-bento { grid-template-columns: 1fr 1fr; }
+    .lp-arche-side { flex-direction: row; }
+    .lp-steps { grid-template-columns: 1fr 1fr; }
+    .lp-values { grid-template-columns: 1fr 1fr; }
+    .lp-foot-top { grid-template-columns: 1.2fr 1fr 1fr; }
+  }
+  @media (max-width: 760px) {
+    :root { --s-8: 44px; --s-9: 64px; }
+    .lp-hero-grid { grid-template-columns: 1fr; }
+    .lp-hero-copy { grid-column: span 1; padding-right: 0; }
+    .lp-hero-art  { grid-column: span 1; }
+    .lp-hero h1 { font-size: 48px; }
+    .lp-hero-trust { grid-template-columns: 1fr 1fr; }
+    .lp-section-head { grid-template-columns: 1fr; gap: var(--s-4); }
+    .lp-bento { grid-template-columns: 1fr; }
+    .lp-arche-side { flex-direction: column; }
+    .lp-steps { grid-template-columns: 1fr; }
+    .lp-values { grid-template-columns: 1fr 1fr; }
+    .lp-sample { grid-template-columns: 1fr; padding: var(--s-7); }
+    .lp-sample h2 { font-size: 36px; }
+    .lp-founder { grid-template-columns: 1fr; gap: var(--s-6); }
+    .lp-founder-quote { font-size: 28px; }
+    .lp-faq-grid { grid-template-columns: 1fr; gap: var(--s-6); }
+    .lp-cta-band { grid-template-columns: 1fr; padding: var(--s-8) var(--s-6); }
+    .lp-cta-band h2 { font-size: 42px; }
+    .lp-finep { grid-template-columns: 1fr; }
+    .lp-foot-top { grid-template-columns: 1fr 1fr; }
+    nav.lp-primary { display: none; }
+    header.lp-nav .lp-container { grid-template-columns: auto auto; }
+    .lp-hero-float-1 { left: 12px; top: 12px; }
+    .lp-hero-float-2 { right: 12px; bottom: 12px; max-width: 65%; }
+  }
+</style>
+</head>
+
+<body>
+
+<!-- ============== UTILITY BAR ============== -->
+<div class="lp-util">
+  <div class="lp-container">
+    <span class="lp-util-dot"></span>
+    <span>A working vintage Ferrari shop · Hiring craftsmen, not technicians.</span>
+    <a href="#archetypes">See the four archetypes →</a>
+  </div>
+</div>
+
+<!-- ============== HEADER ============== -->
+<header class="lp-nav">
+  <div class="lp-container">
+    <div class="lp-row-tight">
+      <span class="lp-brand">
+        <span class="lp-brand-mark">Hollywood<em>Mechanic</em></span>
+        <span class="lp-brand-dot"></span>
+      </span>
+    </div>
+
+    <nav class="lp-primary">
+      <a href="#hero">The Assessment</a>
+      <a href="#archetypes">The Four Archetypes</a>
+      <a href="#shop">The Shop</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+    <div class="lp-header-right">
+      <a href="#sample" class="lp-small" style="font-weight:600; padding: 8px 4px;">Sample result</a>
+      <a href="/app.html" class="lp-btn lp-btn-primary lp-btn-sm">Start the 5-min screen <span class="lp-arrow">→</span></a>
+    </div>
+  </div>
+</header>
+
+<!-- ============== HERO ============== -->
+<section class="lp-hero" id="hero">
+  <div class="lp-container">
+    <div class="lp-hero-grid">
+      <div class="lp-hero-copy">
+        <span class="lp-eyebrow">A 5-minute self-screen · Built by a working Ferrari shop</span>
+        <h1 style="margin-top: var(--s-4);">
+          Are you a tinkerer<br/>
+          — or a <span class="lp-ital">vintage specialist?</span>
+        </h1>
+        <p class="lp-lede">
+          A Myers-Briggs-style self-screen built by an actual vintage Ferrari shop. Find out
+          which kind of craftsman you really are — and whether the work most people in the
+          trade do is what you were built for.
+        </p>
+
+        <div class="lp-hero-ctas">
+          <a href="/app.html" class="lp-btn lp-btn-primary">Find out which one you are <span class="lp-arrow">→</span></a>
+          <a href="#how" class="lp-btn lp-btn-ghost">How it scores</a>
+        </div>
+
+        <div class="lp-hero-trust">
+          <div class="lp-hero-trust-item">
+            <span class="lp-eyebrow">01</span>
+            <h4>5-minute screen</h4>
+            <p>24 quick forced-choice items. Pick closer, not "right."</p>
+          </div>
+          <div class="lp-hero-trust-item">
+            <span class="lp-eyebrow">02</span>
+            <h4>Two axes</h4>
+            <p>Cognitive style × motivation source. One chart, four corners.</p>
+          </div>
+          <div class="lp-hero-trust-item">
+            <span class="lp-eyebrow">03</span>
+            <h4>Academic backbone</h4>
+            <p>Adapted from Need-for-Cognition (CEI-II) and Self-Determination Theory.</p>
+          </div>
+          <div class="lp-hero-trust-item">
+            <span class="lp-eyebrow">04</span>
+            <h4>Honest scoring</h4>
+            <p>Forced-choice items make it harder to game. Your first instinct is enough.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="lp-hero-art">
+        <div class="lp-hero-art-card">
+          <img class="lp-ph-img"
+               src="images/hero-car.jpg"
+               alt="Vintage Ferrari in the shop"
+               loading="lazy"
+               onload="this.parentNode.querySelector('.lp-ph-label')?.remove()"
+               onerror="this.remove()" />
+          <span class="lp-ph-label">Drop a vintage Ferrari / shop photo at images/hero-car.jpg · 4:5</span>
+        </div>
+
+        <div class="lp-hero-float lp-hero-float-1">
+          <div style="width:36px;height:36px;border-radius:999px;background:var(--ideal-bg);display:flex;align-items:center;justify-content:center;">
+            <span style="font-family:var(--display); font-size:18px; color:var(--accent); font-weight:600;">✓</span>
+          </div>
+          <div>
+            <div class="lp-small" style="color:var(--ink-3); font-size:11px; font-weight:500; letter-spacing:0.06em; text-transform:uppercase;">Scoring</div>
+            <div style="font-family:var(--display); font-size:17px; letter-spacing:-0.01em;">Two axes · Four archetypes</div>
+          </div>
+        </div>
+
+        <div class="lp-hero-float lp-hero-float-2">
+          <div class="lp-row-tight">
+            <span style="width:7px;height:7px;border-radius:999px;background:var(--accent);"></span>
+            <span class="lp-small" style="font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink-3); font-weight:500;">From the shop</span>
+          </div>
+          <p style="margin:0; font-family:var(--display); font-style: italic; font-size:16.5px; line-height:1.3; color:var(--ink); font-weight:500;">
+            "No service bulletin covers <span style="color:var(--accent);">this one.</span>"
+          </p>
+          <p class="lp-small" style="font-size:12px; color:var(--ink-3); margin:0;">— Shop owner, every Tuesday</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== VALUES STRIP ============== -->
+<section style="padding-bottom: var(--s-9);">
+  <div class="lp-container">
+    <div class="lp-values">
+      <div class="lp-value">
+        <div class="lp-value-bullet">i</div>
+        <h4>Not a trivia quiz</h4>
+        <p>Measures how you think about unfamiliar problems, not what you already know about carburetors.</p>
+      </div>
+      <div class="lp-value">
+        <div class="lp-value-bullet">ii</div>
+        <h4>Forced-choice by design</h4>
+        <p>Both options are positive. Picking the closer one — fast — reveals how you actually work.</p>
+      </div>
+      <div class="lp-value">
+        <div class="lp-value-bullet">iii</div>
+        <h4>Built on real constructs</h4>
+        <p>Adapted from Need-for-Cognition (CEI-II) and Self-Determination Theory's intrinsic motivation scale.</p>
+      </div>
+      <div class="lp-value">
+        <div class="lp-value-bullet">iv</div>
+        <h4>First instinct wins</h4>
+        <p>Five minutes. The fast answer is more accurate than the deliberated one. Don't overthink it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== ARCHETYPES BENTO ============== -->
+<section class="lp-section" id="archetypes" style="padding-top:0;">
+  <div class="lp-container">
+    <div class="lp-section-head">
+      <div>
+        <span class="lp-eyebrow">The four archetypes</span>
+        <h2 class="lp-display-2" style="margin: var(--s-3) 0 0;">
+          One axis is <span class="lp-ital">how you think.</span><br/>
+          The other is <span class="lp-ital">why you work.</span>
+        </h2>
+      </div>
+      <p class="lp-lede">
+        Two axes — Cognitive Style and Motivation Source — make four corners.
+        Most of the trade lives in one of them. The shop is hiring out of another.
+      </p>
+    </div>
+
+    <div class="lp-bento">
+
+      <!-- Vintage Specialist — ideal -->
+      <article class="lp-arche-card lp-card-ideal">
+        <span class="lp-arche-tag">
+          <span class="lp-fit-dot ideal"></span>
+          What the shop hires
+        </span>
+        <h3>The Vintage Specialist</h3>
+        <p class="lp-arche-headline">The profile we're looking for.</p>
+        <p class="lp-body">
+          Intrinsically driven to be at the top of the craft, and naturally exploratory when no
+          manual exists. You'd rather understand why a car behaves a certain way than just
+          replace parts in order. This is the rarest profile in the trade and the one our shop
+          is built around.
+        </p>
+        <div class="lp-arche-meta">
+          <div>
+            <span class="lp-eyebrow">Fit</span>
+            <div class="lp-val">Ideal</div>
+          </div>
+          <div>
+            <span class="lp-eyebrow">Quadrant</span>
+            <div class="lp-val">Exploratory × Mastery</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Master Technician — secondary -->
+      <article class="lp-arche-card lp-card-cream">
+        <span class="lp-arche-tag">
+          <span class="lp-fit-dot secondary"></span>
+          Secondary fit
+        </span>
+        <h3>The Master Technician</h3>
+        <p class="lp-arche-headline" style="color: var(--ink-2);">
+          Excellent on documented work; may plateau on undocumented problems.
+        </p>
+        <p class="lp-body">
+          You care deeply about quality and want to be the best at your craft, but you're most
+          effective when there's a clear procedure to master. World-class on factory-spec
+          restorations and routine service — open-ended diagnosis on cars nobody has
+          documented may not be where you do your best work.
+        </p>
+        <div class="lp-arche-meta">
+          <div>
+            <span class="lp-eyebrow">Fit</span>
+            <div class="lp-val">Secondary</div>
+          </div>
+          <div>
+            <span class="lp-eyebrow">Quadrant</span>
+            <div class="lp-val">Procedural × Mastery</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Side stack: Tinkerer + Service Mechanic -->
+      <div class="lp-arche-side">
+        <div class="lp-arche-small">
+          <span class="lp-fit-pill"><span class="lp-fit-dot weak"></span> Less common fit</span>
+          <h3>The Tinkerer</h3>
+          <p>
+            Curious and inventive, but not necessarily driven by mastery. Good at figuring things
+            out — doesn't always meet the consistency bar customers pay for.
+          </p>
+          <div style="margin-top: auto; padding-top: var(--s-4); font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3);">
+            Exploratory × Task-driven
+          </div>
+        </div>
+        <div class="lp-arche-small exclude">
+          <span class="lp-fit-pill"><span class="lp-fit-dot exclude"></span> Different role entirely</span>
+          <h3>The Service Mechanic</h3>
+          <p>
+            Best suited to dealer service or production-shop environments. Efficient when the
+            procedure is clear — not where this kind of open-ended diagnostic craft lives.
+          </p>
+          <div style="margin-top: auto; padding-top: var(--s-4); font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3);">
+            Procedural × Task-driven
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== HOW IT WORKS ============== -->
+<section class="lp-section" id="how" style="padding-top:0;">
+  <div class="lp-container">
+    <div class="lp-section-head">
+      <div>
+        <span class="lp-eyebrow">How it works</span>
+        <h2 class="lp-display-2" style="margin: var(--s-3) 0 0;">
+          Five minutes.<br/>
+          Then a <span class="lp-ital">quadrant chart</span> and a paragraph.
+        </h2>
+      </div>
+      <p class="lp-lede">
+        24 forced-choice items, two scoring axes, four archetypes. No essay questions,
+        no trick answers. The faster you go, the more accurate it is.
+      </p>
+    </div>
+
+    <div class="lp-steps">
+      <div class="lp-step">
+        <span class="lp-step-num">1</span>
+        <h3 class="lp-h3">Answer 24 quick choices</h3>
+        <p>Pick the option that's closer to how you actually are — not how you think you should be. Both choices are positive; there is no "right" answer.</p>
+        <div class="lp-step-foot">5 minutes</div>
+      </div>
+      <div class="lp-step">
+        <span class="lp-step-num">2</span>
+        <h3 class="lp-h3">We plot you on two axes</h3>
+        <p>Cognitive Style (Procedural ↔ Exploratory) on X. Motivation Source (Task-driven ↔ Mastery-driven) on Y. The two cross at the origin.</p>
+        <div class="lp-step-foot">Two axes</div>
+      </div>
+      <div class="lp-step">
+        <span class="lp-step-num">3</span>
+        <h3 class="lp-h3">You see your archetype</h3>
+        <p>Whichever corner you land in — Vintage Specialist, Master Technician, Tinkerer, or Service Mechanic — comes with one paragraph on how it tends to read at work.</p>
+        <div class="lp-step-foot">Quadrant chart + read</div>
+      </div>
+      <div class="lp-step">
+        <span class="lp-step-num">4</span>
+        <h3 class="lp-h3">If you fit, we reach out</h3>
+        <p>If you land in the top-right, the shop will follow up within a few business days. If you don't, you still get to keep your result.</p>
+        <div class="lp-step-foot">Within a few days</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== SAMPLE RESULT ============== -->
+<section class="lp-section-sm" id="sample" style="padding-top: 0;">
+  <div class="lp-container">
+    <div class="lp-sample">
+      <div>
+        <span class="lp-eyebrow" style="color: var(--gold);">What you'll get</span>
+        <h2 style="margin-top: var(--s-3);">
+          A <span class="lp-ital">quadrant chart</span><br/>
+          and a paragraph on how you work.
+        </h2>
+        <p class="lp-lede">
+          No spider charts, no scores out of 100, no personality-test horoscope.
+          Two axes, your dot, your archetype. That's the whole thing.
+        </p>
+        <div class="lp-chip-row">
+          <span class="lp-chip"><span class="lp-chip-dot" style="background: var(--gold);"></span> Private</span>
+          <span class="lp-chip"><span class="lp-chip-dot" style="background: var(--accent);"></span> No account to start</span>
+          <span class="lp-chip"><span class="lp-chip-dot" style="background: rgba(255,255,255,0.6);"></span> Shareable result</span>
+        </div>
+      </div>
+
+      <div class="lp-sample-card">
+        <span class="lp-eyebrow">Sample result</span>
+        <div style="margin-top: var(--s-3);">
+          <div class="lp-sample-chart">
+            <!-- Mock quadrant chart -->
+            <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto; display:block;">
+              <!-- Background cells -->
+              <rect x="10"  y="10"  width="110" height="110" fill="#efe9df" />
+              <rect x="120" y="10"  width="110" height="110" fill="#f6e6d8" />
+              <rect x="10"  y="120" width="110" height="110" fill="#e8e0d2" />
+              <rect x="120" y="120" width="110" height="110" fill="#ece4d7" />
+              <!-- Axes -->
+              <line x1="10"  y1="120" x2="230" y2="120" stroke="#cdbfa8" stroke-width="1" />
+              <line x1="120" y1="10"  x2="120" y2="230" stroke="#cdbfa8" stroke-width="1" />
+              <!-- Cell labels -->
+              <text x="65"  y="68"  font-family="Playfair Display" font-style="italic" font-size="11" fill="#6e6457" text-anchor="middle">Master Technician</text>
+              <text x="175" y="68"  font-family="Playfair Display" font-style="italic" font-size="11" fill="#7C0D0D" text-anchor="middle" font-weight="600">Vintage Specialist</text>
+              <text x="65"  y="180" font-family="Playfair Display" font-style="italic" font-size="11" fill="#6e6457" text-anchor="middle">Service Mechanic</text>
+              <text x="175" y="180" font-family="Playfair Display" font-style="italic" font-size="11" fill="#6e6457" text-anchor="middle">Tinkerer</text>
+              <!-- Axis labels -->
+              <text x="120" y="244" font-family="JetBrains Mono" font-size="8.5" fill="#6e6457" text-anchor="middle" letter-spacing="1.2">COGNITIVE STYLE →</text>
+              <text transform="translate(2, 120) rotate(-90)" font-family="JetBrains Mono" font-size="8.5" fill="#6e6457" text-anchor="middle" letter-spacing="1.2">MOTIVATION →</text>
+              <!-- Dot in top-right (Vintage Specialist) -->
+              <circle cx="185" cy="48" r="9" fill="#B71C1C" stroke="#FBF8F2" stroke-width="3" />
+              <circle cx="185" cy="48" r="14" fill="none" stroke="#B71C1C" stroke-width="1" opacity="0.35" />
+            </svg>
+          </div>
+          <div class="lp-sample-chart-cap">
+            <div>
+              <div style="font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3);">Your archetype</div>
+              <div class="lp-sample-cap-label" style="font-family: var(--display); font-size: 17px; font-weight: 600; margin-top: 2px;">Vintage Specialist</div>
+            </div>
+            <a href="/app.html" class="lp-btn lp-btn-primary lp-btn-sm">Start your screen <span class="lp-arrow">→</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== FOUNDER / FROM THE SHOP ============== -->
+<section class="lp-section" id="shop" style="padding-top: 0;">
+  <div class="lp-container">
+    <div class="lp-founder">
+      <div>
+        <span class="lp-eyebrow">From the shop</span>
+        <p class="lp-founder-quote" style="margin-top: var(--s-4);">
+          "We can teach a procedure. We can't teach someone to
+          <span class="lp-ital">wonder why</span> a fifty-year-old carburetor behaves
+          the way it does at altitude. That's what this screen is for."
+        </p>
+        <div class="lp-founder-attrib">
+          <div class="lp-ph lp-founder-avatar warm-accent">
+            <img class="lp-ph-img"
+                 src="images/founder-avatar.jpg"
+                 alt="The shop owner"
+                 loading="lazy"
+                 onerror="this.remove()" />
+          </div>
+          <div>
+            <div class="lp-founder-name">The shop owner</div>
+            <div class="lp-founder-role">Hollywood, CA · Working vintage Ferrari shop</div>
+          </div>
+        </div>
+      </div>
+      <div class="lp-ph lp-ph-43" style="border-radius: var(--r-xl);">
+        <img class="lp-ph-img"
+             src="images/founder-shop.jpg"
+             alt="The shop floor"
+             loading="lazy"
+             onload="this.parentNode.querySelector('.lp-ph-label')?.remove()"
+             onerror="this.remove()" />
+        <span class="lp-ph-label">Drop a shop / workbench photo at images/founder-shop.jpg · 4:3</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== FAQ ============== -->
+<section class="lp-section" id="faq" style="padding-top: 0;">
+  <div class="lp-container">
+    <div class="lp-faq-grid">
+      <div>
+        <span class="lp-eyebrow">Questions, answered</span>
+        <h2 class="lp-display-2" style="margin: var(--s-3) 0 var(--s-5);">
+          The questions people <span class="lp-ital">actually</span> ask first.
+        </h2>
+        <p class="lp-body">
+          If we haven't covered yours, the screen takes five minutes anyway — the result
+          will probably tell you most of what you wanted to know.
+        </p>
+        <a href="/app.html" class="lp-btn lp-btn-ghost" style="margin-top: var(--s-5);">Take the screen instead</a>
+      </div>
+
+      <div class="lp-faq-list">
+        <div class="lp-faq-item open">
+          <div class="lp-faq-q">
+            <h4>Will this be used to filter me out?</h4>
+            <span class="lp-plus">+</span>
+          </div>
+          <p class="lp-faq-a">
+            For this specific shop, yes — if you land in the bottom-left (Service Mechanic),
+            this role isn't where you'd do your best work, and we'll say so. Every other quadrant
+            stays in the conversation. The screen is here to widen the funnel for the top-right,
+            not to disqualify anyone.
+          </p>
+        </div>
+        <div class="lp-faq-item">
+          <div class="lp-faq-q">
+            <h4>Are my answers private?</h4>
+            <span class="lp-plus">+</span>
+          </div>
+          <p class="lp-faq-a">
+            Yes. Only the shop sees them, and only if you provide your contact info during the
+            screen. The result is yours to do whatever you want with — share it, save it, ignore it.
+          </p>
+        </div>
+        <div class="lp-faq-item">
+          <div class="lp-faq-q">
+            <h4>Is there a "right" answer?</h4>
+            <span class="lp-plus">+</span>
+          </div>
+          <p class="lp-faq-a">
+            No. Every item is forced-choice between two positive options. Both describe real
+            craftsmen the trade needs — just different kinds. Picking the closer one quickly is
+            more accurate than picking the "better-sounding" one slowly.
+          </p>
+        </div>
+        <div class="lp-faq-item">
+          <div class="lp-faq-q">
+            <h4>How long does it actually take?</h4>
+            <span class="lp-plus">+</span>
+          </div>
+          <p class="lp-faq-a">
+            Around five minutes. 24 items, one screen per item, no essay questions.
+            Most people finish in under four.
+          </p>
+        </div>
+        <div class="lp-faq-item">
+          <div class="lp-faq-q">
+            <h4>Do I need to be in LA, or willing to move?</h4>
+            <span class="lp-plus">+</span>
+          </div>
+          <p class="lp-faq-a">
+            The shop is in the Hollywood area and the role is in-person. If you're elsewhere
+            and curious about the result, take it anyway — the screen works for any vintage
+            mechanic context.
+          </p>
+        </div>
+        <div class="lp-faq-item">
+          <div class="lp-faq-q">
+            <h4>What if I don't fit the top-right?</h4>
+            <span class="lp-plus">+</span>
+          </div>
+          <p class="lp-faq-a">
+            You still see your archetype and the read on how you work. Most of the trade lives
+            outside the top-right — that's not a bad thing, it just means a different shop
+            environment is probably a better fit for you.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== CTA BAND ============== -->
+<section style="padding: 0 0 var(--s-9);">
+  <div class="lp-container">
+    <div class="lp-cta-band">
+      <div>
+        <span class="lp-eyebrow" style="color: var(--gold);">Ready to find out?</span>
+        <h2 style="margin-top: var(--s-4);">
+          The five minutes that tell you which kind of <span class="lp-ital">craftsman</span> you are.
+        </h2>
+      </div>
+      <div style="display:flex; flex-direction: column; gap: var(--s-5); align-items: flex-start;">
+        <p>24 quick choices. One quadrant chart. A paragraph that's worth reading even if you're not applying.</p>
+        <div class="lp-row-tight" style="flex-wrap: wrap; gap: 10px;">
+          <a href="/app.html" class="lp-btn lp-btn-primary">Start the screen <span class="lp-arrow">→</span></a>
+          <a href="#how" class="lp-btn lp-btn-ghost">See how it's scored</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== DISCLAIMER ============== -->
+<section style="padding: 0 0 var(--s-9);">
+  <div class="lp-container">
+    <div class="lp-finep">
+      <div>
+        <span class="lp-eyebrow" style="color: var(--ink-2);">About the screen</span>
+        <h4 style="margin-top: var(--s-3);">A self-screen, not a psychometric test.</h4>
+      </div>
+      <div>
+        <p>
+          The Vintage Mechanic Fit Assessment is a structured self-screen adapted from
+          Need-for-Cognition (CEI-II) and Self-Determination Theory's intrinsic motivation
+          construct. It's a useful hiring signal — not a diagnostic or a personality classifier.
+        </p>
+        <p>
+          Results are private. Contact information is only used if you choose to share it during
+          the screen, and only by the hiring shop.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== FOOTER ============== -->
+<footer class="lp-foot">
+  <div class="lp-container">
+    <div class="lp-foot-top">
+      <div>
+        <div class="lp-foot-brand">Hollywood<em>Mechanic</em></div>
+        <p style="max-width: 280px;">
+          A 5-minute self-screen for mechanics who reason from physics on cars no service manual covers.
+        </p>
+      </div>
+      <div>
+        <h5>The Assessment</h5>
+        <ul>
+          <li><a href="/app.html">Start the screen</a></li>
+          <li><a href="#archetypes">The four archetypes</a></li>
+          <li><a href="#how">How it scores</a></li>
+          <li><a href="#sample">Sample result</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>The Shop</h5>
+        <ul>
+          <li><a href="#shop">From the shop</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#hero">What we hire</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Reading</h5>
+        <ul>
+          <li><a href="#">Need-for-Cognition (CEI-II)</a></li>
+          <li><a href="#">Self-Determination Theory</a></li>
+          <li><a href="#">Why forced-choice items</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Legal</h5>
+        <ul>
+          <li><a href="#">Privacy</a></li>
+          <li><a href="#">Terms</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="lp-foot-bottom">
+      <p>© 2026 Hollywood Mechanic · Hiring out of the top-right corner.</p>
+      <p>Made for craftsmen.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.lp-faq-item').forEach((item) => {
+    item.querySelector('.lp-faq-q').addEventListener('click', () => {
+      item.classList.toggle('open');
+    });
+  });
+</script>
+
+</body>
 </html>

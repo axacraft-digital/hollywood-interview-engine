@@ -46,9 +46,11 @@ hollywood-interview-engine/
 │   └── check.mjs                    ← Sanity checks; run via `npm run check`
 ├── data/
 │   └── submissions.json             ← Auto-created by dev-api on first submission
-├── index.html                       ← Vite demo entrypoint
+├── index.html                       ← Marketing landing page (front-of-funnel)
+├── app.html                         ← Vite SPA entrypoint (the quiz; loads src/main.jsx)
+├── images/                          ← Photo slots referenced by index.html
 ├── package.json                     ← Exposes component, scoring, instrument, styles as exports
-└── vite.config.js                   ← Registers devApiPlugin
+└── vite.config.js                   ← Registers devApiPlugin; multi-entry rollupOptions
 ```
 
 ## Commands
