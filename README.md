@@ -39,7 +39,7 @@ Brochure intro  →  Email gate  →  Questions (24)  →  Result + fit-tiered C
    (marketing)     (POST /leads)  (one at a time)    (POST /submissions/:id)
 ```
 
-1. **Brochure intro** — Renders the four archetypes upfront ("Are you a Tinkerer, Service Mechanic, Master Technician, or Vintage Specialist?"). Curiosity hook before the ask.
+1. **Brochure intro** — Renders the four archetypes upfront ("Are you a Tinkerer, Service Mechanic, Master Technician, or Hollywood Mechanic?"). Curiosity hook before the ask.
 2. **Email gate** — Collects name, email, phone, experience. POSTs to `/api/leads`, receives `{ sessionId, attemptNumber }`. The lead is now in your database even if the candidate abandons.
 3. **Questions** — One forced-choice item at a time with progress bar. Grouped into 4 sections (problem approach, motivation, off-the-clock, in-the-shop scenarios).
 4. **Result** — Quadrant chart + axis breakdown + fit-tiered post-result message. Submission PATCHed to `/api/submissions/:sessionId`.

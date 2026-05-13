@@ -38,7 +38,7 @@ Instruments are JSON documents that fully define an assessment: its axes, its qu
 ```jsonc
 {
   "id": "vintage-specialist",
-  "label": "The Vintage Specialist",
+  "label": "The Hollywood Mechanic",
   "x": "high",   // "low" | "high" — position on axes[0]
   "y": "high",   // "low" | "high" — position on axes[1]
   "fit": "ideal", // "ideal" | "secondary" | "weak" | "exclude"

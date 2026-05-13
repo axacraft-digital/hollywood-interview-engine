@@ -140,7 +140,7 @@ export default function SubmissionsView({ adminToken = 'dev-admin-token' }) {
           Filter:&nbsp;
           <select value={filterFit} onChange={(e) => setFilterFit(e.target.value)}>
             <option value="all">All</option>
-            <option value="ideal">Ideal fit (Vintage Specialist)</option>
+            <option value="ideal">Ideal fit (Hollywood Mechanic)</option>
             <option value="secondary">Secondary (Master Technician)</option>
             <option value="weak">Weak (Tinkerer)</option>
             <option value="exclude">Exclude (Service Mechanic)</option>

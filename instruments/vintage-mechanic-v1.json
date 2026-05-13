@@ -1,13 +1,13 @@
 {
   "id": "vintage-mechanic-v1",
-  "version": 1,
+  "version": 2,
   "title": "Vintage Mechanic Fit Assessment",
   "subtitle": "A 5-minute self-screen for working on cars nobody wrote a manual for.",
   "intro": "There is no factory service bulletin for the problems we work on. Most days you'll be reasoning from physics — heat, pressure, friction, vibration — and from patterns you've seen on other cars. This short assessment looks at how you naturally approach unfamiliar problems and what motivates you at work. There are no right or wrong answers. Pick whichever option is closer to how you actually are, not how you think you should be.",
   "completionMinutes": 5,
   "brochure": {
     "eyebrow": "Self-screen · 5 minutes · 24 questions",
-    "hero": "Are you a Tinkerer, a Service Mechanic, a Master Technician, or a Vintage Specialist?",
+    "hero": "Are you a Tinkerer, a Service Mechanic, a Master Technician, or a Hollywood Mechanic?",
     "kicker": "A Myers-Briggs-style self-screen built by an actual vintage Ferrari shop. Find out which kind of craftsman you really are — and whether the work most people in the trade do is what you were built for.",
     "shopBlurb": "Used by a working vintage Ferrari shop to identify the rare hires they want to keep for decades. If you score in the top-right, they'd like to meet you.",
     "ctaPrimary": "Find out which one you are",
@@ -34,7 +34,7 @@
   "quadrants": [
     {
       "id": "vintage-specialist",
-      "label": "The Vintage Specialist",
+      "label": "The Hollywood Mechanic",
       "x": "high",
       "y": "high",
       "fit": "ideal",
