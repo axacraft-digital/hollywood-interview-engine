@@ -85,6 +85,8 @@ Suggested production backends:
 - **Airtable** — Fastest path. Submissions become spreadsheet rows. Limited query power.
 - **Your existing Postgres** — If you already have backend infrastructure (Teligant stack, etc.), drop in a new table and reuse your ops.
 
+> Full options walkthrough for client review: **[docs/BACKEND-OPTIONS.md](docs/BACKEND-OPTIONS.md)** — covers why a backend is needed, what works without one, side-by-side comparison of A (form-to-email), B (Vercel/Netlify functions), C (Supabase), D (Airtable), E (existing infra), plus a decision framework and questions to ask the client.
+
 ## Integrating into your own site
 
 ```jsx
