@@ -6,7 +6,7 @@ Guidance for Claude (or other AI assistants) working in this repository. Read th
 
 **Hollywood Interview Engine** is a JSON-driven, drop-in React component for candidate self-screening on quadrant-style fit assessments. The component itself is instrument-agnostic — every assessment is fully defined by a JSON document under `instruments/`.
 
-The v1 instrument is **vintage-mechanic-v1**: a 24-item Myers-Briggs-style self-screen for hiring vintage Ferrari mechanics. The user (Kelly, owner of Axacraft / founder of Teligant) commissioned this after a call with his mechanic about the difficulty of hiring help who can reason from physics on cars no service manual covers.
+The v1 instrument is **vintage-mechanic-v1** (ID retained for stability; the shop actually works on modern sports cars and exotics): a 24-item Myers-Briggs-style self-screen for hiring mechanics at a modern sports car and exotics shop. The user (Kelly, owner of Axacraft / founder of Teligant) commissioned this after a call with his mechanic about the difficulty of hiring help who can reason from physics on cars no service manual covers.
 
 Future instruments will likely include screens for telehealth provider intake (Teligant / Zaya / HedFirst) and other domains the user's digital agency serves. **The architecture is built to support that without code changes.**
 
@@ -130,11 +130,11 @@ Kelly's preferences (from session profile):
 - Wants technical detail and jargon — don't soften.
 - Wants trade-offs explicit, with pros/cons or key considerations.
 - Wants concise, actionable advice (bullets/frameworks > prose walls).
-- Primary domain is telehealth (Teligant, Zaya, HedFirst). This screening engine is a side project for his vintage Ferrari mechanic, but **the architecture should generalize** — he may use it for other roles.
+- Primary domain is telehealth (Teligant, Zaya, HedFirst). This screening engine is a side project for his mechanic, who works at a shop on modern sports cars and exotics, but **the architecture should generalize** — he may use it for other roles.
 
 ## Things to be careful about
 
 - **Don't break instrument backward-compat without a version bump.** If a field semantics changes, the JSON `version` must change too.
 - **Don't add server dependencies to the component.** It must remain a drop-in for any React/Next.js host site.
-- **Don't hardcode the vintage Ferrari theme into the component.** Colors and copy should be themeable; the only domain-specific thing in the React code is the component name (`MechanicAssessment`), which is a v1 naming concession — renaming to a generic `QuadrantAssessment` is a reasonable future refactor.
+- **Don't hardcode the modern-sports-cars-and-exotics theme into the component.** Colors and copy should be themeable; the only domain-specific thing in the React code is the component name (`MechanicAssessment`), which is a v1 naming concession — renaming to a generic `QuadrantAssessment` is a reasonable future refactor.
 - **Item wording is a stakeholder decision, not a Claude decision.** Don't rewrite items without an explicit ask. Validity comes from items written in the practitioner's voice, not the model's.
