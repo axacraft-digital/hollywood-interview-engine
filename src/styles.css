@@ -722,3 +722,42 @@
   color: var(--via-muted);
   font-style: italic;
 }
+
+/* ====================================================================
+   PIN gate (Submissions admin)
+   ==================================================================== */
+
+.via-pin-gate {
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.via-pin-form {
+  display: flex;
+  gap: 8px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.via-pin-input {
+  flex: 1 1 200px;
+  font-family: inherit;
+  font-size: 15px;
+  padding: 12px 14px;
+  border: 1px solid var(--via-line);
+  border-radius: 2px;
+  background: #fff;
+  color: var(--via-text);
+  letter-spacing: 0.05em;
+}
+
+.via-pin-input:focus {
+  outline: none;
+  border-color: var(--via-accent);
+}
+
+.via-pin-error {
+  margin-top: 14px;
+  font-size: 14px;
+  color: var(--via-accent);
+}

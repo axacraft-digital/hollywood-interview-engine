@@ -14,7 +14,7 @@ function Demo() {
 
   const adminMode = params.get('admin') === '1';
   const submissionsMode = params.get('submissions') === '1';
-  const token = params.get('token') || 'dev-admin-token';
+  const token = params.get('token') || '';
 
   return (
     <div style={{ minHeight: '100vh', padding: '40px 16px', background: '#F5F1EA' }}>

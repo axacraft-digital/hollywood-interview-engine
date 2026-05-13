@@ -54,11 +54,14 @@ npm run check        # runs scoring sanity checks
 
 Demo URLs:
 
-- `http://localhost:5173/` — candidate flow
-- `http://localhost:5173/?admin=1` — instrument preview (every question with scoring keys)
-- `http://localhost:5173/?submissions=1&token=dev-admin-token` — hiring authority view of all submissions
+- `http://localhost:5173/` — marketing landing page (front of funnel)
+- `http://localhost:5173/app.html` — candidate flow (the assessment itself)
+- `http://localhost:5173/app.html?admin=1` — instrument preview (every question with scoring keys)
+- `http://localhost:5173/app.html?submissions=1` — hiring authority view; gated by PIN (default `dev-admin-token`; set `ADMIN_TOKEN` env var to override)
 
 ## Where the hiring authority sees results
+
+> Owner-facing instruction manual: **[docs/SUBMISSIONS-ADMIN.md](docs/SUBMISSIONS-ADMIN.md)** — how the shop owner signs in with a PIN, reads submissions, exports CSV, etc. Read that if you're the one setting up the deploy or training the owner.
 
 The dev API stores everything in `data/submissions.json`. Open the submissions admin view (link above) to see:
 

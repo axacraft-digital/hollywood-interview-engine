@@ -1,29 +1,62 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo, useCallback } from 'react';
+
+const PIN_STORAGE_KEY = 'via-admin-pin';
+
+function readStoredPin() {
+  if (typeof window === 'undefined') return '';
+  try {
+    return window.localStorage.getItem(PIN_STORAGE_KEY) || '';
+  } catch {
+    return '';
+  }
+}
+
+function writeStoredPin(pin) {
+  if (typeof window === 'undefined') return;
+  try {
+    if (pin) window.localStorage.setItem(PIN_STORAGE_KEY, pin);
+    else window.localStorage.removeItem(PIN_STORAGE_KEY);
+  } catch {
+    /* ignore */
+  }
+}
 
 /**
  * SubmissionsView
  *
- * Hiring-authority view of all assessment submissions. Fetches /api/admin/submissions
- * (with token query param) and renders a sortable, filterable table.
+ * Hiring-authority view of all assessment submissions. The view is PIN-gated:
+ * on first visit the owner enters a PIN, which is saved to localStorage so
+ * future visits skip the prompt. The PIN itself is whatever string the
+ * backend's /api/admin/submissions endpoint accepts via ?token=...
  *
- * This is the prototype answer to "where does the hiring authority see the
- * results?" In production, swap this for whatever backend admin you set up
- * (Supabase Studio, Retool, Metabase, etc.).
+ * Auth precedence:
+ *   1. adminToken prop (passed via ?token= in URL — kept for dev convenience)
+ *   2. localStorage 'via-admin-pin'
+ *   3. PIN entry form
+ *
+ * Wrong PIN → server returns 401 → stored PIN is cleared → form re-appears.
  */
-export default function SubmissionsView({ adminToken = 'dev-admin-token' }) {
-  const [loading, setLoading] = useState(true);
+export default function SubmissionsView({ adminToken: initialToken }) {
+  const [token, setToken] = useState(initialToken || readStoredPin());
+  const [loading, setLoading] = useState(Boolean(initialToken || readStoredPin()));
   const [error, setError] = useState(null);
   const [submissions, setSubmissions] = useState([]);
   const [filterFit, setFilterFit] = useState('all');
   const [sortBy, setSortBy] = useState('startedAt');
   const [sortDir, setSortDir] = useState('desc');
+  const [pinInput, setPinInput] = useState('');
 
-  useEffect(() => {
-    const url = `/api/admin/submissions?token=${encodeURIComponent(adminToken)}`;
-    fetch(url)
-      .then((r) => r.json())
-      .then((data) => {
-        if (!data.ok) {
+  const loadSubmissions = useCallback((t) => {
+    setLoading(true);
+    setError(null);
+    fetch(`/api/admin/submissions?token=${encodeURIComponent(t)}`)
+      .then(async (r) => {
+        const data = await r.json().catch(() => ({}));
+        if (r.status === 401) {
+          writeStoredPin('');
+          setToken('');
+          setError("That PIN didn't work. Try again.");
+        } else if (!data.ok) {
           setError(data.message || 'Failed to load submissions.');
         } else {
           setSubmissions(data.submissions || []);
@@ -34,9 +67,28 @@ export default function SubmissionsView({ adminToken = 'dev-admin-token' }) {
         setError(String(e));
         setLoading(false);
       });
-  }, [adminToken]);
+  }, []);
 
-  // Build a per-email summary: total attempts + most-recent result
+  useEffect(() => {
+    if (token) loadSubmissions(token);
+  }, [token, loadSubmissions]);
+
+  const submitPin = (e) => {
+    e.preventDefault();
+    const trimmed = pinInput.trim();
+    if (!trimmed) return;
+    writeStoredPin(trimmed);
+    setToken(trimmed);
+    setPinInput('');
+  };
+
+  const signOut = () => {
+    writeStoredPin('');
+    setToken('');
+    setSubmissions([]);
+    setError(null);
+  };
+
   const byEmail = useMemo(() => {
     const map = new Map();
     for (const s of submissions) {
@@ -47,8 +99,6 @@ export default function SubmissionsView({ adminToken = 'dev-admin-token' }) {
   }, [submissions]);
 
   const fitOf = (s) => {
-    // Derive fit from quadrantId via a known map (for the v1 instrument).
-    // In a real deployment this would come from the instrument JSON cached server-side.
     const fitMap = {
       'vintage-specialist': 'ideal',
       'master-technician': 'secondary',
@@ -113,18 +163,45 @@ export default function SubmissionsView({ adminToken = 'dev-admin-token' }) {
     URL.revokeObjectURL(url);
   };
 
+  // PIN gate — shown when no valid token is known.
+  if (!token) {
+    return (
+      <section className="via-card via-pin-gate">
+        <div className="via-eyebrow">Hiring authority view</div>
+        <h1 className="via-title">Submissions admin</h1>
+        <p className="via-subtitle">
+          Enter the access PIN to see candidate submissions. The PIN is set by whoever
+          deployed this site — ask them if you don't have it.
+        </p>
+        <form onSubmit={submitPin} className="via-pin-form">
+          <input
+            type="password"
+            autoComplete="current-password"
+            placeholder="Access PIN"
+            value={pinInput}
+            onChange={(e) => setPinInput(e.target.value)}
+            className="via-pin-input"
+            autoFocus
+          />
+          <button type="submit" className="via-btn via-btn-primary">Sign in</button>
+        </form>
+        {error && <p className="via-pin-error">{error}</p>}
+      </section>
+    );
+  }
+
   if (loading) return <div className="via-card via-loading">Loading submissions…</div>;
-  if (error)
+  if (error) {
     return (
       <div className="via-card via-error">
         <h2>Couldn't load submissions</h2>
         <p>{error}</p>
-        <p style={{ fontSize: 13, color: 'var(--via-muted)' }}>
-          Tip: pass the admin token in the URL, e.g.{' '}
-          <code>?submissions=1&token=dev-admin-token</code>
-        </p>
+        <button className="via-btn" onClick={signOut} style={{ marginTop: 12 }}>
+          Sign out and re-enter PIN
+        </button>
       </div>
     );
+  }
 
   return (
     <section className="via-card via-submissions">
@@ -148,6 +225,7 @@ export default function SubmissionsView({ adminToken = 'dev-admin-token' }) {
           </select>
         </label>
         <button className="via-btn" onClick={exportCsv}>Export CSV</button>
+        <button className="via-btn" onClick={signOut}>Sign out</button>
       </div>
 
       <div className="via-table-wrap">
