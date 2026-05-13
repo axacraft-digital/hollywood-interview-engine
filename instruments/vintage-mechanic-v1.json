@@ -1,0 +1,331 @@
+{
+  "id": "vintage-mechanic-v1",
+  "version": 1,
+  "title": "Vintage Mechanic Fit Assessment",
+  "subtitle": "A 5-minute self-screen for working on cars nobody wrote a manual for.",
+  "intro": "There is no factory service bulletin for the problems we work on. Most days you'll be reasoning from physics — heat, pressure, friction, vibration — and from patterns you've seen on other cars. This short assessment looks at how you naturally approach unfamiliar problems and what motivates you at work. There are no right or wrong answers. Pick whichever option is closer to how you actually are, not how you think you should be.",
+  "completionMinutes": 5,
+  "brochure": {
+    "eyebrow": "Self-screen · 5 minutes · 24 questions",
+    "hero": "Are you a Tinkerer, a Service Mechanic, a Master Technician, or a Vintage Specialist?",
+    "kicker": "A Myers-Briggs-style self-screen built by an actual vintage Ferrari shop. Find out which kind of craftsman you really are — and whether the work most people in the trade do is what you were built for.",
+    "shopBlurb": "Used by a working vintage Ferrari shop to identify the rare hires they want to keep for decades. If you score in the top-right, they'd like to meet you.",
+    "ctaPrimary": "Find out which one you are",
+    "ctaSecondary": "Takes about 5 minutes. Your answers are private."
+  },
+  "axes": [
+    {
+      "id": "curiosity",
+      "label": "Cognitive Style",
+      "lowLabel": "Procedural",
+      "highLabel": "Exploratory",
+      "lowDescription": "Prefers established procedures and documented fixes. Strong when the path is known.",
+      "highDescription": "Pattern-matches across unfamiliar problems. Reasons from first principles when no procedure exists."
+    },
+    {
+      "id": "mastery",
+      "label": "Motivation Source",
+      "lowLabel": "Task-driven",
+      "highLabel": "Mastery-driven",
+      "lowDescription": "Work is a job to be done well. Recognition comes from completion and pay.",
+      "highDescription": "Wants to be among the very best in the craft. Recognition comes from peers and self-comparison to the top of the field."
+    }
+  ],
+  "quadrants": [
+    {
+      "id": "vintage-specialist",
+      "label": "The Vintage Specialist",
+      "x": "high",
+      "y": "high",
+      "fit": "ideal",
+      "headline": "The profile we're looking for.",
+      "description": "Intrinsically driven to be at the top of the craft, and naturally exploratory when no manual exists. You'd rather understand why a car behaves a certain way than just replace parts in order. This is the rarest profile in the trade and the one our shop is built around.",
+      "postResultMessage": "If you'd like to talk about working with us, you don't need to do anything else — we already have your details. The shop will reach out within a few business days."
+    },
+    {
+      "id": "master-technician",
+      "label": "The Master Technician",
+      "x": "low",
+      "y": "high",
+      "fit": "secondary",
+      "headline": "Excellent at well-documented work; may plateau on undocumented vintage problems.",
+      "description": "You care deeply about quality and want to be the best at your craft, but you're most effective when there's a clear procedure to master. You'll be world-class on factory-spec restorations and routine service. Open-ended diagnosis on cars nobody has documented may not be where you do your best work.",
+      "postResultMessage": "Thanks for taking this seriously. We have your details and may reach out if a more procedural restoration role opens up."
+    },
+    {
+      "id": "tinkerer",
+      "label": "The Tinkerer",
+      "x": "high",
+      "y": "low",
+      "fit": "weak",
+      "headline": "Curious and inventive, but not necessarily driven by mastery.",
+      "description": "You enjoy figuring things out and you're good at it, but you're not necessarily pushing to be the best in the field. In a vintage Ferrari shop this can lead to interesting work that doesn't always meet the consistency bar customers pay for.",
+      "postResultMessage": "Thanks for playing. Tinkerers often find their stride in their own shop or in restoration side-work rather than in a customer-facing role."
+    },
+    {
+      "id": "service-mechanic",
+      "label": "The Service Mechanic",
+      "x": "low",
+      "y": "low",
+      "fit": "exclude",
+      "headline": "Best suited to dealer service or production shop environments.",
+      "description": "You're efficient and reliable when the procedure is clear, and your motivation is mostly completion and pay — both of which are good fits for a high-volume dealer or service shop. The kind of open-ended, peer-respected diagnostic craft this role requires probably wouldn't be where you'd thrive.",
+      "postResultMessage": "Thanks for taking the time. This particular role probably isn't where you'd do your best work — high-volume dealer or fleet service shops typically suit this profile much better."
+    }
+  ],
+  "groups": [
+    {
+      "id": "problem-approach",
+      "title": "How you approach problems",
+      "description": "Quick read on how you naturally think about challenges, especially unfamiliar ones.",
+      "questions": [
+        {
+          "id": "c1",
+          "type": "forced-choice",
+          "prompt": "When I encounter a problem I've never seen before, I most often:",
+          "options": [
+            { "label": "Research what others have tried first.", "axis": "curiosity", "score": -1 },
+            { "label": "Start poking at it to see how it responds.", "axis": "curiosity", "score": 1 }
+          ]
+        },
+        {
+          "id": "c2",
+          "type": "forced-choice",
+          "prompt": "I find more satisfaction in:",
+          "options": [
+            { "label": "Solving a problem using a known method.", "axis": "curiosity", "score": -1 },
+            { "label": "Figuring out why something behaves unexpectedly.", "axis": "curiosity", "score": 1 }
+          ]
+        },
+        {
+          "id": "c3",
+          "type": "forced-choice",
+          "prompt": "When two systems behave in similar ways, my first instinct is to:",
+          "options": [
+            { "label": "Note the similarity and move on.", "axis": "curiosity", "score": -1 },
+            { "label": "Wonder if the same underlying physics is at play.", "axis": "curiosity", "score": 1 }
+          ]
+        },
+        {
+          "id": "c4",
+          "type": "forced-choice",
+          "prompt": "I'd rather work on:",
+          "options": [
+            { "label": "A car with a clear factory spec to restore.", "axis": "curiosity", "score": -1 },
+            { "label": "A car nobody has documented properly.", "axis": "curiosity", "score": 1 }
+          ]
+        },
+        {
+          "id": "c5",
+          "type": "forced-choice",
+          "prompt": "When something works correctly but I don't fully understand why:",
+          "options": [
+            { "label": "I leave it alone — it works.", "axis": "curiosity", "score": -1 },
+            { "label": "It bothers me until I work it out.", "axis": "curiosity", "score": 1 }
+          ]
+        },
+        {
+          "id": "c6",
+          "type": "forced-choice",
+          "prompt": "I tend to ask:",
+          "options": [
+            { "label": "'What's the fix?'", "axis": "curiosity", "score": -1 },
+            { "label": "'Why does this happen?'", "axis": "curiosity", "score": 1 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "what-drives-you",
+      "title": "What drives you at work",
+      "description": "How you think about your own performance and what 'good' looks like to you.",
+      "questions": [
+        {
+          "id": "m1",
+          "type": "forced-choice",
+          "prompt": "What matters most about my work:",
+          "options": [
+            { "label": "Getting jobs done on time and getting paid fairly.", "axis": "mastery", "score": -1 },
+            { "label": "Being known for the quality of what I do.", "axis": "mastery", "score": 1 }
+          ]
+        },
+        {
+          "id": "m2",
+          "type": "forced-choice",
+          "prompt": "I'd describe my craft as:",
+          "options": [
+            { "label": "A job I do well.", "axis": "mastery", "score": -1 },
+            { "label": "Part of who I am.", "axis": "mastery", "score": 1 }
+          ]
+        },
+        {
+          "id": "m3",
+          "type": "forced-choice",
+          "prompt": "The recognition that matters most to me comes from:",
+          "options": [
+            { "label": "Customers and my paycheck.", "axis": "mastery", "score": -1 },
+            { "label": "Other people deeply skilled in the same craft.", "axis": "mastery", "score": 1 }
+          ]
+        },
+        {
+          "id": "m4",
+          "type": "forced-choice",
+          "prompt": "I judge my own work against:",
+          "options": [
+            { "label": "The shop's standards.", "axis": "mastery", "score": -1 },
+            { "label": "The best in the world at this.", "axis": "mastery", "score": 1 }
+          ]
+        },
+        {
+          "id": "m5",
+          "type": "forced-choice",
+          "prompt": "A great day at work looks like:",
+          "options": [
+            { "label": "Smooth, predictable jobs that go in and out.", "axis": "mastery", "score": -1 },
+            { "label": "Cracking something I haven't seen before.", "axis": "mastery", "score": 1 }
+          ]
+        },
+        {
+          "id": "m6",
+          "type": "forced-choice",
+          "prompt": "Offered the same pay either way, I'd take:",
+          "options": [
+            { "label": "Routine work I'm already good at.", "axis": "mastery", "score": -1 },
+            { "label": "Harder work that would stretch me.", "axis": "mastery", "score": 1 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "off-the-clock",
+      "title": "Off the clock",
+      "description": "What you do, read, and think about when nobody is paying you to.",
+      "questions": [
+        {
+          "id": "c7",
+          "type": "forced-choice",
+          "prompt": "On a free Saturday afternoon, I'd rather:",
+          "options": [
+            { "label": "Follow a detailed restoration guide step by step.", "axis": "curiosity", "score": -1 },
+            { "label": "Diagnose a quirk nobody else has been able to nail down.", "axis": "curiosity", "score": 1 }
+          ]
+        },
+        {
+          "id": "c8",
+          "type": "forced-choice",
+          "prompt": "The books, podcasts, or videos I gravitate to are mostly about:",
+          "options": [
+            { "label": "How specific repairs are done.", "axis": "curiosity", "score": -1 },
+            { "label": "How and why systems work the way they do.", "axis": "curiosity", "score": 1 }
+          ]
+        },
+        {
+          "id": "c9",
+          "type": "forced-choice",
+          "prompt": "When I learn a new fact about thermodynamics, materials, or fluid dynamics:",
+          "options": [
+            { "label": "I file it for later — interesting but not immediately useful.", "axis": "curiosity", "score": -1 },
+            { "label": "I start thinking about which problems it might explain.", "axis": "curiosity", "score": 1 }
+          ]
+        },
+        {
+          "id": "m7",
+          "type": "forced-choice",
+          "prompt": "After hours, I usually:",
+          "options": [
+            { "label": "Disconnect from work completely.", "axis": "mastery", "score": -1 },
+            { "label": "Read, watch, or tinker with topics related to my craft.", "axis": "mastery", "score": 1 }
+          ]
+        },
+        {
+          "id": "m8",
+          "type": "forced-choice",
+          "prompt": "When I learn a new technique:",
+          "options": [
+            { "label": "I use it on the job when it comes up.", "axis": "mastery", "score": -1 },
+            { "label": "I practice it on my own time until it's automatic.", "axis": "mastery", "score": 1 }
+          ]
+        },
+        {
+          "id": "m9",
+          "type": "forced-choice",
+          "prompt": "Working on cars or my own projects after dinner sounds:",
+          "options": [
+            { "label": "Like the last thing I'd want to do.", "axis": "mastery", "score": -1 },
+            { "label": "Like a normal evening.", "axis": "mastery", "score": 1 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "in-the-shop",
+      "title": "In the shop",
+      "description": "How you'd actually behave in the situations this job throws at you.",
+      "questions": [
+        {
+          "id": "c10",
+          "type": "forced-choice",
+          "prompt": "A car comes in with an intermittent miss only when the engine is fully heat-soaked. No service bulletin covers it. I would:",
+          "options": [
+            { "label": "Replace the most-likely heat-sensitive components in order until it's gone.", "axis": "curiosity", "score": -1 },
+            { "label": "Map where heat is accumulating and which components are near their thermal limit, then form a hypothesis.", "axis": "curiosity", "score": 1 }
+          ]
+        },
+        {
+          "id": "c11",
+          "type": "forced-choice",
+          "prompt": "I'm handed a part I've never seen before and asked what it does. I would:",
+          "options": [
+            { "label": "Look it up or ask someone who knows.", "axis": "curiosity", "score": -1 },
+            { "label": "Examine it, weigh it, think about what physics it has to satisfy — then look it up.", "axis": "curiosity", "score": 1 }
+          ]
+        },
+        {
+          "id": "c12",
+          "type": "forced-choice",
+          "prompt": "A new noise appears only in a specific RPM range. I would first:",
+          "options": [
+            { "label": "Check the most common causes in order.", "axis": "curiosity", "score": -1 },
+            { "label": "Think about what mechanical phenomena (resonance, harmonic, fuel-charge timing) operate in that range.", "axis": "curiosity", "score": 1 }
+          ]
+        },
+        {
+          "id": "m10",
+          "type": "forced-choice",
+          "prompt": "I made a mistake on a job that nobody noticed and the car drove out fine. I would:",
+          "options": [
+            { "label": "Move on — no harm done.", "axis": "mastery", "score": -1 },
+            { "label": "Want to understand exactly how I missed it so it doesn't happen again.", "axis": "mastery", "score": 1 }
+          ]
+        },
+        {
+          "id": "m11",
+          "type": "forced-choice",
+          "prompt": "A colleague asks why I take longer on certain jobs. I'd say:",
+          "options": [
+            { "label": "I get them done — speed comes with reps.", "axis": "mastery", "score": -1 },
+            { "label": "I'd rather finish one job right than two jobs roughly.", "axis": "mastery", "score": 1 }
+          ]
+        },
+        {
+          "id": "m12",
+          "type": "forced-choice",
+          "prompt": "After finishing a tough repair, I most often:",
+          "options": [
+            { "label": "Move to the next ticket.", "axis": "mastery", "score": -1 },
+            { "label": "Think about how I could do it better next time.", "axis": "mastery", "score": 1 }
+          ]
+        }
+      ]
+    }
+  ],
+  "leadCapture": {
+    "enabled": true,
+    "mode": "pre-test",
+    "fields": ["name", "email", "phone", "experienceYears"],
+    "gateHeading": "Tell us who you are, then take the assessment",
+    "gateBlurb": "We collect your details up-front so the shop can follow up if you're a fit. Your responses to the assessment are private and only used for hiring consideration.",
+    "cta": "Start the assessment",
+    "consentLine": "I consent to being contacted about open mechanic roles."
+  }
+}

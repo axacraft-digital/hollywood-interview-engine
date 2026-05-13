@@ -1,0 +1,724 @@
+/* =====================================================================
+   Vintage Interview Assessment — scoped styles
+   All class names prefixed with .via- to avoid host-site collisions.
+   Colors are exposed as CSS custom properties so integrators can re-theme.
+   ===================================================================== */
+
+.via-root {
+  --via-cream: #F5F1EA;
+  --via-paper: #FBF8F2;
+  --via-accent: #B71C1C;        /* aged Rosso Corsa */
+  --via-accent-dark: #7C0D0D;
+  --via-gold: #C5A572;
+  --via-text: #1F1B16;
+  --via-muted: #6e6457;
+  --via-line: #cdbfa8;
+  --via-ideal-bg: #f6e6d8;
+  --via-secondary-bg: #efe9df;
+  --via-weak-bg: #ece4d7;
+  --via-exclude-bg: #e8e0d2;
+
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  color: var(--via-text);
+  line-height: 1.55;
+}
+
+.via-card {
+  background: var(--via-paper);
+  border: 1px solid var(--via-line);
+  border-radius: 4px;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.02), 0 12px 32px rgba(31, 27, 22, 0.06);
+  padding: 48px 56px;
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.via-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 1.15;
+  margin: 0 0 8px;
+  color: var(--via-text);
+  letter-spacing: -0.01em;
+}
+
+.via-subtitle {
+  font-size: 16px;
+  color: var(--via-muted);
+  margin: 0 0 24px;
+}
+
+.via-brand {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 14px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--via-accent);
+  margin-bottom: 24px;
+}
+
+.via-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--via-muted);
+  margin-bottom: 8px;
+}
+
+.via-meta {
+  display: flex;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--via-muted);
+  margin-bottom: 28px;
+}
+
+.via-intro-copy {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--via-text);
+  margin: 0 0 32px;
+}
+
+/* Buttons ----------------------------------------------------------- */
+
+.via-btn {
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 13px 28px;
+  border-radius: 2px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background 120ms ease, color 120ms ease, border 120ms ease;
+}
+
+.via-btn-primary {
+  background: var(--via-accent);
+  color: #fff;
+  border-color: var(--via-accent);
+}
+
+.via-btn-primary:hover:not(:disabled) {
+  background: var(--via-accent-dark);
+  border-color: var(--via-accent-dark);
+}
+
+.via-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.via-link-btn {
+  background: none;
+  border: none;
+  color: var(--via-muted);
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  padding: 4px 0;
+}
+
+.via-link-btn:hover {
+  color: var(--via-accent);
+}
+
+/* Progress ---------------------------------------------------------- */
+
+.via-progress-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.via-progress-text {
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--via-muted);
+}
+
+.via-progress-bar {
+  height: 2px;
+  background: var(--via-line);
+  border-radius: 1px;
+  overflow: hidden;
+  margin-bottom: 36px;
+}
+
+.via-progress-fill {
+  height: 100%;
+  background: var(--via-accent);
+  transition: width 220ms ease;
+}
+
+/* Question screen --------------------------------------------------- */
+
+.via-group-header {
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--via-line);
+}
+
+.via-group-eyebrow {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 14px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--via-accent);
+  margin-bottom: 8px;
+}
+
+.via-group-desc {
+  font-size: 14px;
+  color: var(--via-muted);
+  margin: 0;
+}
+
+.via-prompt {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.3;
+  margin: 0 0 32px;
+  color: var(--via-text);
+}
+
+.via-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.via-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: var(--via-cream);
+  border: 1px solid var(--via-line);
+  border-radius: 3px;
+  padding: 18px 22px;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  font-size: 16px;
+  color: var(--via-text);
+  transition: border 120ms ease, background 120ms ease, transform 80ms ease;
+}
+
+.via-option:hover {
+  border-color: var(--via-accent);
+  background: #fff;
+}
+
+.via-option:active {
+  transform: translateY(1px);
+}
+
+.via-option-selected {
+  border-color: var(--via-accent);
+  background: #fff;
+  box-shadow: inset 4px 0 0 var(--via-accent);
+}
+
+.via-option-letter {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--via-accent);
+  min-width: 20px;
+}
+
+.via-option-label {
+  flex: 1;
+  line-height: 1.5;
+}
+
+/* Result screen ----------------------------------------------------- */
+
+.via-result-header {
+  text-align: center;
+  padding-bottom: 32px;
+  margin-bottom: 32px;
+  border-bottom: 1px solid var(--via-line);
+}
+
+.via-fit-ideal .via-title {
+  color: var(--via-accent);
+}
+
+.via-headline {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 18px;
+  font-style: italic;
+  color: var(--via-muted);
+  margin: 0;
+}
+
+.via-borderline-note {
+  margin-top: 16px;
+  padding: 12px 16px;
+  background: var(--via-cream);
+  border-left: 3px solid var(--via-gold);
+  font-size: 13px;
+  color: var(--via-muted);
+  text-align: left;
+}
+
+.via-result-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 32px;
+}
+
+@media (max-width: 720px) {
+  .via-result-body {
+    grid-template-columns: 1fr;
+  }
+  .via-card {
+    padding: 32px 24px;
+  }
+}
+
+.via-chart-wrap {
+  width: 100%;
+}
+
+.via-quadrant-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.via-result-text h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 18px;
+  margin: 0 0 12px;
+}
+
+.via-result-text p {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--via-text);
+  margin: 0 0 24px;
+}
+
+.via-score-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.via-score-axis {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--via-muted);
+  margin-bottom: 6px;
+}
+
+.via-score-bar {
+  height: 6px;
+  background: var(--via-line);
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+}
+
+.via-score-fill {
+  height: 100%;
+  background: var(--via-accent);
+}
+
+.via-score-ends {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--via-muted);
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* Lead capture ------------------------------------------------------ */
+
+.via-lead-form {
+  border-top: 1px solid var(--via-line);
+  padding-top: 32px;
+}
+
+.via-lead-form h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 22px;
+  margin: 0 0 20px;
+}
+
+.via-lead-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 600px) {
+  .via-lead-fields {
+    grid-template-columns: 1fr;
+  }
+}
+
+.via-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--via-muted);
+}
+
+.via-field input {
+  font-family: inherit;
+  font-size: 15px;
+  padding: 10px 12px;
+  border: 1px solid var(--via-line);
+  border-radius: 2px;
+  background: #fff;
+  color: var(--via-text);
+}
+
+.via-field input:focus {
+  outline: none;
+  border-color: var(--via-accent);
+}
+
+.via-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--via-muted);
+  margin-bottom: 20px;
+}
+
+.via-lead-success {
+  border-top: 1px solid var(--via-line);
+  padding-top: 24px;
+  text-align: center;
+}
+
+.via-form-error {
+  margin-top: 12px;
+  color: var(--via-accent);
+  font-size: 13px;
+}
+
+/* Admin view -------------------------------------------------------- */
+
+.via-admin h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 22px;
+  margin: 32px 0 12px;
+}
+
+.via-admin h4 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 18px;
+  margin: 20px 0 8px;
+  color: var(--via-accent);
+}
+
+.via-admin code {
+  background: var(--via-cream);
+  padding: 1px 6px;
+  border-radius: 2px;
+  font-size: 12px;
+}
+
+.via-admin-desc {
+  margin-top: 6px;
+  font-size: 13px;
+  color: var(--via-muted);
+}
+
+.via-admin-prompt {
+  font-weight: 600;
+  margin: 8px 0 4px;
+}
+
+.via-admin ul,
+.via-admin ol {
+  padding-left: 20px;
+}
+
+.via-error,
+.via-loading {
+  padding: 40px;
+  text-align: center;
+  color: var(--via-muted);
+}
+
+/* Brochure intro --------------------------------------------------- */
+
+.via-brochure {
+  text-align: center;
+}
+
+.via-brochure-hero {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  margin: 16px auto 16px;
+  max-width: 720px;
+  color: var(--via-text);
+}
+
+.via-brochure-kicker {
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--via-muted);
+  max-width: 640px;
+  margin: 0 auto 36px;
+}
+
+.via-quadrant-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin: 0 auto 32px;
+  max-width: 880px;
+}
+
+@media (max-width: 880px) {
+  .via-quadrant-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .via-brochure-hero {
+    font-size: 32px;
+  }
+}
+
+.via-quadrant-card {
+  background: var(--via-cream);
+  border: 1px solid var(--via-line);
+  border-radius: 3px;
+  padding: 18px 16px;
+  text-align: left;
+  transition: transform 120ms ease, border-color 120ms ease;
+}
+
+.via-quadrant-card:hover {
+  transform: translateY(-2px);
+}
+
+.via-quadrant-card.via-fit-ideal {
+  border-color: var(--via-accent);
+  background: var(--via-ideal-bg);
+}
+
+.via-quadrant-card-fit {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--via-muted);
+  margin-bottom: 8px;
+}
+
+.via-quadrant-card.via-fit-ideal .via-quadrant-card-fit {
+  color: var(--via-accent);
+  font-weight: 600;
+}
+
+.via-quadrant-card-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 6px;
+  color: var(--via-text);
+}
+
+.via-quadrant-card-headline {
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--via-muted);
+  margin: 0;
+}
+
+.via-brochure-shopblurb {
+  font-style: italic;
+  color: var(--via-muted);
+  max-width: 580px;
+  margin: 0 auto 28px;
+  font-size: 14px;
+  padding-top: 24px;
+  border-top: 1px solid var(--via-line);
+}
+
+.via-brochure-cta {
+  margin-top: 8px;
+}
+
+.via-btn-large {
+  font-size: 16px;
+  padding: 16px 36px;
+}
+
+.via-brochure-ctasub {
+  margin-top: 12px;
+  font-size: 12px;
+  color: var(--via-muted);
+}
+
+/* Email gate ------------------------------------------------------- */
+
+.via-gate .via-title {
+  margin-top: 20px;
+}
+
+.via-gate .via-link-btn {
+  display: inline-block;
+}
+
+/* Post-result banner ----------------------------------------------- */
+
+.via-post-result {
+  margin-top: 24px;
+  padding: 20px 24px;
+  border-radius: 3px;
+  background: var(--via-cream);
+  border-left: 3px solid var(--via-muted);
+}
+
+.via-post-result.via-fit-ideal {
+  background: var(--via-ideal-bg);
+  border-left-color: var(--via-accent);
+}
+
+.via-post-result.via-fit-secondary {
+  background: var(--via-secondary-bg);
+  border-left-color: var(--via-gold);
+}
+
+.via-post-result p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--via-text);
+}
+
+.via-status-line {
+  margin-top: 16px;
+  font-size: 12px;
+  color: var(--via-muted);
+  text-align: center;
+}
+
+/* Submissions admin view ------------------------------------------- */
+
+.via-submissions {
+  max-width: 1100px;
+}
+
+.via-submissions-controls {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin: 24px 0 12px;
+}
+
+.via-submissions-controls select {
+  font-family: inherit;
+  font-size: 14px;
+  padding: 8px 10px;
+  border: 1px solid var(--via-line);
+  background: #fff;
+}
+
+.via-submissions-controls .via-btn {
+  background: var(--via-cream);
+  border: 1px solid var(--via-line);
+  color: var(--via-text);
+}
+
+.via-submissions-controls .via-btn:hover {
+  border-color: var(--via-accent);
+  color: var(--via-accent);
+}
+
+.via-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--via-line);
+  border-radius: 3px;
+}
+
+.via-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.via-table th {
+  text-align: left;
+  background: var(--via-cream);
+  padding: 10px 12px;
+  font-weight: 600;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--via-muted);
+  cursor: pointer;
+  user-select: none;
+  border-bottom: 1px solid var(--via-line);
+}
+
+.via-table th:hover {
+  color: var(--via-accent);
+}
+
+.via-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--via-line);
+  vertical-align: middle;
+}
+
+.via-table tr:last-child td {
+  border-bottom: none;
+}
+
+.via-fit-row-ideal { background: rgba(183, 28, 28, 0.05); }
+.via-fit-row-ideal td:first-child { box-shadow: inset 3px 0 0 var(--via-accent); }
+
+.via-quad-pill {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 600;
+  background: var(--via-cream);
+  border: 1px solid var(--via-line);
+}
+
+.via-quad-pill.via-fit-ideal {
+  background: var(--via-accent);
+  color: #fff;
+  border-color: var(--via-accent);
+}
+
+.via-attempt-flag {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 99px;
+  background: var(--via-gold);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.via-incomplete {
+  font-size: 11px;
+  color: var(--via-muted);
+  font-style: italic;
+}

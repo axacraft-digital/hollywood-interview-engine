@@ -1,0 +1,14 @@
+node_modules/
+dist/
+dist2/
+*.log
+.DS_Store
+.env
+.env.local
+
+# Local dev API storage (use a real DB in production)
+data/submissions.json
+data/check-test*.json
+
+# Vite temp files
+vite.config.js.timestamp-*.mjs
